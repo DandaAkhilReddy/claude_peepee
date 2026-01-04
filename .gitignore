@@ -11,14 +11,42 @@ claude_pp-*
 .vscode/
 *.swp
 *.swo
+*.sublime-*
 
 # OS
 .DS_Store
 Thumbs.db
+.Spotlight-V100
+.Trashes
 
 # Test
 coverage.out
 *.test
+*.prof
 
 # Data (local development)
 .claude_pp/
+*.db
+*.db-wal
+*.db-shm
+
+# Security - NEVER commit these
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.p12
+credentials.json
+secrets.json
+config.local.json
+*.secret
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
