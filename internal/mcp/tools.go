@@ -83,6 +83,7 @@ func (s *Server) handleRecall(args map[string]interface{}) (interface{}, error) 
 	if len(facts) == 0 {
 		return map[string]interface{}{
 			"facts":   []interface{}{},
+			"count":   0,
 			"message": "No matching facts found",
 		}, nil
 	}
