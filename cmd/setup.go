@@ -23,8 +23,8 @@ var (
 
 var setupCmd = &cobra.Command{
 	Use:   "setup",
-	Short: "Configure claude_pp for your AI coding tools",
-	Long: `Configure claude_pp as an MCP server for Claude Code, OpenCode, Codex CLI, or Gemini CLI.
+	Short: "Configure claude_peepee for your AI coding tools",
+	Long: `Configure claude_peepee as an MCP server for Claude Code, OpenCode, Codex CLI, or Gemini CLI.
 
 By default, configures Claude Code globally. Use flags to configure other tools or project-specific settings.`,
 	RunE: runSetup,
@@ -36,7 +36,7 @@ func init() {
 	setupCmd.Flags().BoolVar(&setupOpenCode, "opencode", false, "Configure for OpenCode")
 	setupCmd.Flags().BoolVar(&setupCodex, "codex", false, "Configure for Codex CLI")
 	setupCmd.Flags().BoolVar(&setupGemini, "gemini", false, "Configure for Gemini CLI")
-	setupCmd.Flags().BoolVar(&setupAllowAll, "allow-all", false, "Pre-approve all claude_pp commands")
+	setupCmd.Flags().BoolVar(&setupAllowAll, "allow-all", false, "Pre-approve all claude_peepee commands")
 }
 
 func runSetup(cmd *cobra.Command, args []string) error {
@@ -60,8 +60,8 @@ func runSetup(cmd *cobra.Command, args []string) error {
 }
 
 func getBinaryPath() (string, error) {
-	// Try to find claude_pp in PATH
-	path, err := exec.LookPath("claude_pp")
+	// Try to find claude_peepee in PATH
+	path, err := exec.LookPath("claude_peepee")
 	if err == nil {
 		return path, nil
 	}
@@ -104,7 +104,7 @@ func setupForClaudeCode(binaryPath string) error {
 		mcpServers = make(map[string]interface{})
 	}
 
-	mcpServers["claude_pp"] = map[string]interface{}{
+	mcpServers["claude_peepee"] = map[string]interface{}{
 		"command": binaryPath,
 		"args":    []string{"serve"},
 	}
@@ -122,14 +122,14 @@ func setupForClaudeCode(binaryPath string) error {
 			allow = []interface{}{}
 		}
 
-		// Add claude_pp tool permissions
+		// Add claude_peepee tool permissions
 		tools := []string{
-			"mcp__claude_pp__remember",
-			"mcp__claude_pp__recall",
-			"mcp__claude_pp__get_context",
-			"mcp__claude_pp__list_instances",
-			"mcp__claude_pp__send_message",
-			"mcp__claude_pp__get_messages",
+			"mcp__claude_peepee__remember",
+			"mcp__claude_peepee__recall",
+			"mcp__claude_peepee__get_context",
+			"mcp__claude_peepee__list_instances",
+			"mcp__claude_peepee__send_message",
+			"mcp__claude_peepee__get_messages",
 		}
 
 		for _, tool := range tools {
@@ -199,7 +199,7 @@ func setupForOpenCode(binaryPath string) error {
 		mcpServers = make(map[string]interface{})
 	}
 
-	mcpServers["claude_pp"] = map[string]interface{}{
+	mcpServers["claude_peepee"] = map[string]interface{}{
 		"command": binaryPath,
 		"args":    []string{"serve"},
 	}
@@ -246,7 +246,7 @@ func setupForCodex(binaryPath string) error {
 		mcpServers = make(map[string]interface{})
 	}
 
-	mcpServers["claude_pp"] = map[string]interface{}{
+	mcpServers["claude_peepee"] = map[string]interface{}{
 		"command": binaryPath,
 		"args":    []string{"serve"},
 	}
@@ -293,7 +293,7 @@ func setupForGemini(binaryPath string) error {
 		mcpServers = make(map[string]interface{})
 	}
 
-	mcpServers["claude_pp"] = map[string]interface{}{
+	mcpServers["claude_peepee"] = map[string]interface{}{
 		"command": binaryPath,
 		"args":    []string{"serve"},
 	}
@@ -328,12 +328,12 @@ This project uses Claude PP for persistent memory across Claude Code sessions.
 
 ## Available Tools
 
-- **mcp__claude_pp__remember**: Store facts, decisions, and context
-- **mcp__claude_pp__recall**: Search for previously stored facts
-- **mcp__claude_pp__get_context**: Load all relevant context for this directory
-- **mcp__claude_pp__list_instances**: Find other running Claude Code instances
-- **mcp__claude_pp__send_message**: Send messages to other instances
-- **mcp__claude_pp__get_messages**: Retrieve messages from other instances
+- **mcp__claude_peepee__remember**: Store facts, decisions, and context
+- **mcp__claude_peepee__recall**: Search for previously stored facts
+- **mcp__claude_peepee__get_context**: Load all relevant context for this directory
+- **mcp__claude_peepee__list_instances**: Find other running Claude Code instances
+- **mcp__claude_peepee__send_message**: Send messages to other instances
+- **mcp__claude_peepee__get_messages**: Retrieve messages from other instances
 
 ## Workflow Recommendations
 

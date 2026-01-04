@@ -185,8 +185,8 @@ func TestMCPVersion(t *testing.T) {
 }
 
 func TestServerInfo(t *testing.T) {
-	if ServerName != "claude_pp" {
-		t.Errorf("ServerName = %s, want claude_pp", ServerName)
+	if ServerName != "claude_peepee" {
+		t.Errorf("ServerName = %s, want claude_peepee", ServerName)
 	}
 
 	if ServerVersion != "0.1.0" {

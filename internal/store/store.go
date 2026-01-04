@@ -12,7 +12,7 @@ type Fact struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// Instance represents a running claude_pp instance
+// Instance represents a running claude_peepee instance
 type Instance struct {
 	ID            string    `json:"id"`
 	PID           int       `json:"pid"`

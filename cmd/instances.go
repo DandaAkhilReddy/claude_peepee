@@ -11,7 +11,7 @@ import (
 var instancesCmd = &cobra.Command{
 	Use:   "instances",
 	Short: "List running instances",
-	Long:  `List all running claude_pp instances across different directories.`,
+	Long:  `List all running claude_peepee instances across different directories.`,
 	RunE:  runInstances,
 }
 

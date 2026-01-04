@@ -24,8 +24,8 @@ The UI allows you to:
   - Delete old or irrelevant facts
 
 Example:
-  claude_pp ui           # Start on default port 8420
-  claude_pp ui -p 3000   # Start on port 3000`,
+  claude_peepee ui           # Start on default port 8420
+  claude_peepee ui -p 3000   # Start on port 3000`,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		dataDir := getDataDir()
 

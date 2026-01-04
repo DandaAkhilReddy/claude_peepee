@@ -13,7 +13,7 @@ If you discover a security vulnerability in Claude PP, please report it responsi
 
 ### Data Storage
 
-- All data is stored **locally** in `~/.claude_pp/claude_pp.db`
+- All data is stored **locally** in `~/.claude_peepee/claude_peepee.db`
 - SQLite database with WAL mode for safe concurrent access
 - No data is transmitted to external servers
 - No cloud storage or synchronization
@@ -49,7 +49,7 @@ If you discover a security vulnerability in Claude PP, please report it responsi
 ## Best Practices for Users
 
 1. **Keep the binary updated** - Install latest releases for security fixes
-2. **Protect your data directory** - Ensure `~/.claude_pp/` has appropriate permissions
+2. **Protect your data directory** - Ensure `~/.claude_peepee/` has appropriate permissions
 3. **Don't share database files** - They may contain sensitive project information
 4. **Review stored facts periodically** - Remove any sensitive information
 
@@ -59,10 +59,10 @@ If you discover a security vulnerability in Claude PP, please report it responsi
 
 ```bash
 # Data directory
-chmod 700 ~/.claude_pp
+chmod 700 ~/.claude_peepee
 
 # Database file
-chmod 600 ~/.claude_pp/claude_pp.db
+chmod 600 ~/.claude_peepee/claude_peepee.db
 ```
 
 ### Environment Variables

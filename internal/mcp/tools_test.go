@@ -11,7 +11,7 @@ import (
 func setupTestServer(t *testing.T) (*Server, func()) {
 	t.Helper()
 
-	tmpDir, err := os.MkdirTemp("", "claude_pp_mcp_test")
+	tmpDir, err := os.MkdirTemp("", "claude_peepee_mcp_test")
 	if err != nil {
 		t.Fatalf("failed to create temp dir: %v", err)
 	}

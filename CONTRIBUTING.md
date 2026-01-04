@@ -5,7 +5,7 @@ Thank you for your interest in contributing to Claude PP!
 ## Getting Started
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/claude_pp.git`
+2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/claude_peepee.git`
 3. Create a feature branch: `git checkout -b feature/your-feature`
 4. Make your changes
 5. Run tests: `make test`
@@ -84,7 +84,7 @@ CGO_ENABLED=1 go test -tags "fts5" -v ./internal/store/...
 ### Bug Reports
 
 Include:
-- Claude PP version (`claude_pp version`)
+- Claude PP version (`claude_peepee version`)
 - Go version (`go version`)
 - Operating system
 - Steps to reproduce

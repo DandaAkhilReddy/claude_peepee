@@ -60,7 +60,7 @@ Traditional approach:
   = 500+ tokens EVERY session
 
 With Claude PP:
-  claude_pp recall -t stack
+  claude_peepee recall -t stack
   = 50 tokens (just the search) + relevant results only
 ```
 
@@ -115,7 +115,7 @@ go install github.com/DandaAkhilReddy/claude_peepee@latest
 ### Setup for Claude Code
 
 ```bash
-claude_pp setup
+claude_peepee setup
 ```
 
 **That's it!** Claude Code now has persistent memory.
@@ -128,35 +128,35 @@ claude_pp setup
 
 ```bash
 # Remember a fact
-claude_pp remember "We use PostgreSQL 15 with TimescaleDB extension"
+claude_peepee remember "We use PostgreSQL 15 with TimescaleDB extension"
 
 # Add tags for easy filtering
-claude_pp remember "API rate limit is 100 req/min per user" -t api -t limits
+claude_peepee remember "API rate limit is 100 req/min per user" -t api -t limits
 
 # Store architectural decisions
-claude_pp remember "Chose microservices for independent scaling" -t architecture -t decision
+claude_peepee remember "Chose microservices for independent scaling" -t architecture -t decision
 ```
 
 ### Search Knowledge
 
 ```bash
 # Search by keyword
-claude_pp recall database
+claude_peepee recall database
 
 # Filter by tag
-claude_pp recall -t architecture
+claude_peepee recall -t architecture
 
 # Combine search + tags
-claude_pp recall authentication -t security
+claude_peepee recall authentication -t security
 
 # Limit results
-claude_pp recall -n 5
+claude_peepee recall -n 5
 ```
 
 ### Check Status
 
 ```bash
-claude_pp status
+claude_peepee status
 ```
 
 Output:
@@ -164,7 +164,7 @@ Output:
 Claude PP Status
 ================
 
-Data directory: ~/.claude_pp
+Data directory: ~/.claude_peepee
 Working directory: /projects/myapp
 
 Facts:
@@ -183,7 +183,7 @@ Running instances: 2
 Claude PP includes a beautiful web interface to manage your knowledge base.
 
 ```bash
-claude_pp ui
+claude_peepee ui
 ```
 
 Then open http://localhost:8420 in your browser.
@@ -203,12 +203,12 @@ When using Claude Code, these tools are automatically available:
 
 | Tool | Description |
 |------|-------------|
-| `mcp__claude_pp__remember` | Store a fact with optional tags |
-| `mcp__claude_pp__recall` | Search stored facts |
-| `mcp__claude_pp__get_context` | Load all context for current directory |
-| `mcp__claude_pp__list_instances` | Find other running Claude instances |
-| `mcp__claude_pp__send_message` | Send message to another instance |
-| `mcp__claude_pp__get_messages` | Receive messages from other instances |
+| `mcp__claude_peepee__remember` | Store a fact with optional tags |
+| `mcp__claude_peepee__recall` | Search stored facts |
+| `mcp__claude_peepee__get_context` | Load all context for current directory |
+| `mcp__claude_peepee__list_instances` | Find other running Claude instances |
+| `mcp__claude_peepee__send_message` | Send message to another instance |
+| `mcp__claude_peepee__get_messages` | Receive messages from other instances |
 
 ---
 
@@ -218,41 +218,41 @@ When using Claude Code, these tools are automatically available:
 
 ```bash
 # Store your tech stack
-claude_pp remember "Frontend: React 18 + TypeScript + Vite" -t stack -t frontend
-claude_pp remember "Backend: Go 1.21 + Gin + GORM" -t stack -t backend
-claude_pp remember "Database: PostgreSQL 15 + Redis 7" -t stack -t database
-claude_pp remember "Deployment: Docker + Kubernetes on AWS EKS" -t stack -t devops
+claude_peepee remember "Frontend: React 18 + TypeScript + Vite" -t stack -t frontend
+claude_peepee remember "Backend: Go 1.21 + Gin + GORM" -t stack -t backend
+claude_peepee remember "Database: PostgreSQL 15 + Redis 7" -t stack -t database
+claude_peepee remember "Deployment: Docker + Kubernetes on AWS EKS" -t stack -t devops
 ```
 
 ### 2. Coding Conventions
 
 ```bash
-claude_pp remember "Use kebab-case for file names" -t convention
-claude_pp remember "All API responses use { data, error, meta } format" -t convention -t api
-claude_pp remember "Tests go in __tests__ folder next to source" -t convention -t testing
+claude_peepee remember "Use kebab-case for file names" -t convention
+claude_peepee remember "All API responses use { data, error, meta } format" -t convention -t api
+claude_peepee remember "Tests go in __tests__ folder next to source" -t convention -t testing
 ```
 
 ### 3. Architecture Decisions
 
 ```bash
-claude_pp remember "ADR-001: Use event sourcing for order history - need full audit trail" -t adr
-claude_pp remember "ADR-002: Redis for sessions - need sub-ms latency" -t adr
-claude_pp remember "ADR-003: Separate auth service - security isolation" -t adr
+claude_peepee remember "ADR-001: Use event sourcing for order history - need full audit trail" -t adr
+claude_peepee remember "ADR-002: Redis for sessions - need sub-ms latency" -t adr
+claude_peepee remember "ADR-003: Separate auth service - security isolation" -t adr
 ```
 
 ### 4. Monorepo Coordination
 
 **Terminal 1 (Backend):**
 ```bash
-claude_pp instances
+claude_peepee instances
 # Shows: frontend instance abc123
 
-claude_pp send abc123 "API contract updated - new field 'metadata' on User"
+claude_peepee send abc123 "API contract updated - new field 'metadata' on User"
 ```
 
 **Terminal 2 (Frontend):**
 ```bash
-claude_pp messages abc123
+claude_peepee messages abc123
 # Shows: "API contract updated - new field 'metadata' on User"
 ```
 
@@ -264,18 +264,18 @@ claude_pp messages abc123
 
 ```bash
 # Claude Code (default - global)
-claude_pp setup
+claude_peepee setup
 
 # Claude Code (project only)
-claude_pp setup --project
+claude_peepee setup --project
 
 # Pre-approve all commands
-claude_pp setup --allow-all
+claude_peepee setup --allow-all
 
 # Other AI tools
-claude_pp setup --opencode
-claude_pp setup --codex
-claude_pp setup --gemini
+claude_peepee setup --opencode
+claude_peepee setup --codex
+claude_peepee setup --gemini
 ```
 
 ### Environment Variables
@@ -292,8 +292,8 @@ claude_pp setup --gemini
 All data is stored locally:
 
 ```
-~/.claude_pp/
-└── claude_pp.db    # SQLite database
+~/.claude_peepee/
+└── claude_peepee.db    # SQLite database
 ```
 
 **Your data never leaves your machine.**
@@ -304,9 +304,9 @@ All data is stored locally:
 
 ```bash
 git clone https://github.com/DandaAkhilReddy/claude_peepee.git
-cd claude_pp
+cd claude_peepee
 make build
-./claude_pp version
+./claude_peepee version
 ```
 
 ---
@@ -315,15 +315,15 @@ make build
 
 | Command | Description |
 |---------|-------------|
-| `claude_pp remember <fact>` | Store a fact |
-| `claude_pp recall [query]` | Search facts |
-| `claude_pp status` | Show status |
-| `claude_pp instances` | List running instances |
-| `claude_pp send <id> <msg>` | Send message |
-| `claude_pp messages <id>` | View messages |
-| `claude_pp setup` | Configure for AI tools |
-| `claude_pp ui` | Open web interface |
-| `claude_pp version` | Show version |
+| `claude_peepee remember <fact>` | Store a fact |
+| `claude_peepee recall [query]` | Search facts |
+| `claude_peepee status` | Show status |
+| `claude_peepee instances` | List running instances |
+| `claude_peepee send <id> <msg>` | Send message |
+| `claude_peepee messages <id>` | View messages |
+| `claude_peepee setup` | Configure for AI tools |
+| `claude_peepee ui` | Open web interface |
+| `claude_peepee version` | Show version |
 
 ---
 
@@ -335,8 +335,8 @@ We love contributions! Whether you're fixing bugs, adding features, or improving
 
 ```bash
 # 1. Fork and clone
-git clone https://github.com/YOUR_USERNAME/claude_pp.git
-cd claude_pp
+git clone https://github.com/YOUR_USERNAME/claude_peepee.git
+cd claude_peepee
 
 # 2. Install dependencies
 go mod download

@@ -10,7 +10,7 @@ import (
 func setupTestStore(t *testing.T) (*SQLiteStore, func()) {
 	t.Helper()
 
-	tmpDir, err := os.MkdirTemp("", "claude_pp_test")
+	tmpDir, err := os.MkdirTemp("", "claude_peepee_test")
 	if err != nil {
 		t.Fatalf("failed to create temp dir: %v", err)
 	}
@@ -485,7 +485,7 @@ func TestMarkMessageRead(t *testing.T) {
 // ==================== DATABASE TESTS ====================
 
 func TestNewSQLiteStore(t *testing.T) {
-	tmpDir, err := os.MkdirTemp("", "claude_pp_test")
+	tmpDir, err := os.MkdirTemp("", "claude_peepee_test")
 	if err != nil {
 		t.Fatalf("failed to create temp dir: %v", err)
 	}
@@ -498,7 +498,7 @@ func TestNewSQLiteStore(t *testing.T) {
 	defer store.Close()
 
 	// Verify database file was created
-	dbPath := filepath.Join(tmpDir, "claude_pp.db")
+	dbPath := filepath.Join(tmpDir, "claude_peepee.db")
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		t.Error("Database file was not created")
 	}

@@ -10,7 +10,7 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "claude_pp",
+	Use:   "claude_peepee",
 	Short: "Claude PP - Persistent Memory for Claude Code",
 	Long: `Claude PP is an MCP server that provides AI coding tools with
 persistent memory and multi-instance communication.
@@ -20,7 +20,7 @@ Features:
   - Multi-Instance Discovery: Find and message other Claude Code instances
   - Automatic Context: Load relevant information based on working directory`,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		if cmd.Name() != "claude_pp" {
+		if cmd.Name() != "claude_peepee" {
 			telemetry.Init()
 			telemetry.TrackCommand(cmd.Name())
 		}
@@ -55,5 +55,5 @@ func getDataDir() string {
 		fmt.Fprintf(os.Stderr, "Error getting home directory: %v\n", err)
 		os.Exit(1)
 	}
-	return filepath.Join(homeDir, ".claude_pp")
+	return filepath.Join(homeDir, ".claude_peepee")
 }

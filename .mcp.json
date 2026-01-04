@@ -1,8 +1,8 @@
 {
-  "name": "claude_pp",
+  "name": "claude_peepee",
   "version": "0.1.0",
   "description": "Persistent memory and multi-instance communication for Claude Code",
-  "command": "claude_pp",
+  "command": "claude_peepee",
   "args": ["serve"],
   "tools": [
     {
@@ -19,7 +19,7 @@
     },
     {
       "name": "list_instances",
-      "description": "List all running claude_pp instances"
+      "description": "List all running claude_peepee instances"
     },
     {
       "name": "send_message",

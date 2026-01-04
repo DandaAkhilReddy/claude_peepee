@@ -12,7 +12,7 @@ import (
 var sendCmd = &cobra.Command{
 	Use:   "send [instance-id] [message]",
 	Short: "Send a message to another instance",
-	Long:  `Send a message to another running claude_pp instance.`,
+	Long:  `Send a message to another running claude_peepee instance.`,
 	Args:  cobra.MinimumNArgs(2),
 	RunE:  runSend,
 }

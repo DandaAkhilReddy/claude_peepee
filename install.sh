@@ -55,7 +55,7 @@ main() {
     fi
 
     # Construct download URL
-    BINARY="claude_pp-${OS}-${ARCH}"
+    BINARY="claude_peepee-${OS}-${ARCH}"
     if [ "$OS" = "windows" ]; then
         BINARY="${BINARY}.exe"
     fi
@@ -68,25 +68,25 @@ main() {
     # Download binary
     echo "Downloading ${BINARY}..."
     if command -v curl >/dev/null 2>&1; then
-        curl -sL "$DOWNLOAD_URL" -o "${INSTALL_DIR}/claude_pp"
+        curl -sL "$DOWNLOAD_URL" -o "${INSTALL_DIR}/claude_peepee"
     elif command -v wget >/dev/null 2>&1; then
-        wget -q "$DOWNLOAD_URL" -O "${INSTALL_DIR}/claude_pp"
+        wget -q "$DOWNLOAD_URL" -O "${INSTALL_DIR}/claude_peepee"
     else
         echo "Error: Neither curl nor wget found. Please install one of them."
         exit 1
     fi
 
     # Make executable
-    chmod +x "${INSTALL_DIR}/claude_pp"
+    chmod +x "${INSTALL_DIR}/claude_peepee"
 
     echo ""
-    echo "Claude PP installed to ${INSTALL_DIR}/claude_pp"
+    echo "Claude PP installed to ${INSTALL_DIR}/claude_peepee"
 
     # Check if install dir is in PATH
     case ":$PATH:" in
         *":${INSTALL_DIR}:"*)
             echo ""
-            echo "Run 'claude_pp setup' to configure for your AI coding tool."
+            echo "Run 'claude_peepee setup' to configure for your AI coding tool."
             ;;
         *)
             echo ""
@@ -94,7 +94,7 @@ main() {
             echo ""
             echo "  export PATH=\"\$PATH:${INSTALL_DIR}\""
             echo ""
-            echo "Then run 'claude_pp setup' to configure for your AI coding tool."
+            echo "Then run 'claude_peepee setup' to configure for your AI coding tool."
             ;;
     esac
 }

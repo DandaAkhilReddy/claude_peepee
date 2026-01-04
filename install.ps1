@@ -28,7 +28,7 @@ function Main {
     Write-Host "Version: $version"
 
     # Construct download URL
-    $binary = "claude_pp-windows-$arch.exe"
+    $binary = "claude_peepee-windows-$arch.exe"
     $downloadUrl = "https://github.com/$Repo/releases/download/$version/$binary"
 
     # Create install directory
@@ -36,7 +36,7 @@ function Main {
         New-Item -ItemType Directory -Path $InstallDir -Force | Out-Null
     }
 
-    $installPath = Join-Path $InstallDir "claude_pp.exe"
+    $installPath = Join-Path $InstallDir "claude_peepee.exe"
 
     # Download binary
     Write-Host "Downloading $binary..."
@@ -63,7 +63,7 @@ function Main {
     }
 
     Write-Host ""
-    Write-Host "Run 'claude_pp setup' to configure for your AI coding tool."
+    Write-Host "Run 'claude_peepee setup' to configure for your AI coding tool."
 }
 
 Main

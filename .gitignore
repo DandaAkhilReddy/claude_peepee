@@ -1,6 +1,6 @@
 # Binaries
-claude_pp
-claude_pp-*
+claude_peepee
+claude_peepee-*
 *.exe
 
 # Go build cache
@@ -25,7 +25,7 @@ coverage.out
 *.prof
 
 # Data (local development)
-.claude_pp/
+.claude_peepee/
 *.db
 *.db-wal
 *.db-shm

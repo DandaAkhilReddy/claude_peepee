@@ -10,17 +10,17 @@ import (
 	"testing"
 )
 
-// Integration tests for the claude_pp CLI
+// Integration tests for the claude_peepee CLI
 
 func TestCLIVersion(t *testing.T) {
-	cmd := exec.Command("./claude_pp", "version")
+	cmd := exec.Command("./claude_peepee", "version")
 	output, err := cmd.Output()
 	if err != nil {
 		t.Fatalf("version command failed: %v", err)
 	}
 
-	if !strings.Contains(string(output), "claude_pp version") {
-		t.Error("version output should contain 'claude_pp version'")
+	if !strings.Contains(string(output), "claude_peepee version") {
+		t.Error("version output should contain 'claude_peepee version'")
 	}
 
 	if !strings.Contains(string(output), "0.1.0") {
@@ -29,7 +29,7 @@ func TestCLIVersion(t *testing.T) {
 }
 
 func TestCLIHelp(t *testing.T) {
-	cmd := exec.Command("./claude_pp", "--help")
+	cmd := exec.Command("./claude_peepee", "--help")
 	output, err := cmd.Output()
 	if err != nil {
 		t.Fatalf("help command failed: %v", err)
@@ -55,7 +55,7 @@ func TestCLIHelp(t *testing.T) {
 }
 
 func TestCLIRememberHelp(t *testing.T) {
-	cmd := exec.Command("./claude_pp", "remember", "--help")
+	cmd := exec.Command("./claude_peepee", "remember", "--help")
 	output, err := cmd.Output()
 	if err != nil {
 		t.Fatalf("remember --help failed: %v", err)
@@ -67,7 +67,7 @@ func TestCLIRememberHelp(t *testing.T) {
 }
 
 func TestCLIRecallHelp(t *testing.T) {
-	cmd := exec.Command("./claude_pp", "recall", "--help")
+	cmd := exec.Command("./claude_peepee", "recall", "--help")
 	output, err := cmd.Output()
 	if err != nil {
 		t.Fatalf("recall --help failed: %v", err)
@@ -82,7 +82,7 @@ func TestCLIRecallHelp(t *testing.T) {
 }
 
 func TestCLISetupHelp(t *testing.T) {
-	cmd := exec.Command("./claude_pp", "setup", "--help")
+	cmd := exec.Command("./claude_peepee", "setup", "--help")
 	output, err := cmd.Output()
 	if err != nil {
 		t.Fatalf("setup --help failed: %v", err)
@@ -98,7 +98,7 @@ func TestCLISetupHelp(t *testing.T) {
 
 func TestCLIRememberAndRecall(t *testing.T) {
 	// Use a temporary data directory
-	tmpDir, err := os.MkdirTemp("", "claude_pp_integration_test")
+	tmpDir, err := os.MkdirTemp("", "claude_peepee_integration_test")
 	if err != nil {
 		t.Fatalf("failed to create temp dir: %v", err)
 	}
@@ -107,7 +107,7 @@ func TestCLIRememberAndRecall(t *testing.T) {
 	env := append(os.Environ(), "HOME="+tmpDir)
 
 	// Remember a fact
-	rememberCmd := exec.Command("./claude_pp", "remember", "Integration test fact", "-t", "test", "-t", "integration")
+	rememberCmd := exec.Command("./claude_peepee", "remember", "Integration test fact", "-t", "test", "-t", "integration")
 	rememberCmd.Env = env
 	rememberOutput, err := rememberCmd.CombinedOutput()
 	if err != nil {
@@ -119,7 +119,7 @@ func TestCLIRememberAndRecall(t *testing.T) {
 	}
 
 	// Recall the fact
-	recallCmd := exec.Command("./claude_pp", "recall", "Integration")
+	recallCmd := exec.Command("./claude_peepee", "recall", "Integration")
 	recallCmd.Env = env
 	recallOutput, err := recallCmd.CombinedOutput()
 	if err != nil {
@@ -136,7 +136,7 @@ func TestCLIRememberAndRecall(t *testing.T) {
 }
 
 func TestCLIStatus(t *testing.T) {
-	tmpDir, err := os.MkdirTemp("", "claude_pp_status_test")
+	tmpDir, err := os.MkdirTemp("", "claude_peepee_status_test")
 	if err != nil {
 		t.Fatalf("failed to create temp dir: %v", err)
 	}
@@ -145,12 +145,12 @@ func TestCLIStatus(t *testing.T) {
 	env := append(os.Environ(), "HOME="+tmpDir)
 
 	// Add a fact first
-	rememberCmd := exec.Command("./claude_pp", "remember", "Status test fact")
+	rememberCmd := exec.Command("./claude_peepee", "remember", "Status test fact")
 	rememberCmd.Env = env
 	rememberCmd.Run()
 
 	// Check status
-	cmd := exec.Command("./claude_pp", "status")
+	cmd := exec.Command("./claude_peepee", "status")
 	cmd.Env = env
 	output, err := cmd.CombinedOutput()
 	if err != nil {
@@ -174,16 +174,16 @@ func TestCLIStatus(t *testing.T) {
 }
 
 func TestCLIInstances(t *testing.T) {
-	tmpDir, err := os.MkdirTemp("", "claude_pp_instances_test")
+	tmpDir, err := os.MkdirTemp("", "claude_peepee_instances_test")
 	if err != nil {
 		t.Fatalf("failed to create temp dir: %v", err)
 	}
 	defer os.RemoveAll(tmpDir)
 
 	// Create the data directory
-	os.MkdirAll(filepath.Join(tmpDir, ".claude_pp"), 0755)
+	os.MkdirAll(filepath.Join(tmpDir, ".claude_peepee"), 0755)
 
-	cmd := exec.Command("./claude_pp", "instances")
+	cmd := exec.Command("./claude_peepee", "instances")
 	cmd.Env = append(os.Environ(), "HOME="+tmpDir)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
@@ -196,7 +196,7 @@ func TestCLIInstances(t *testing.T) {
 }
 
 func TestMCPServerProtocol(t *testing.T) {
-	tmpDir, err := os.MkdirTemp("", "claude_pp_mcp_test")
+	tmpDir, err := os.MkdirTemp("", "claude_peepee_mcp_test")
 	if err != nil {
 		t.Fatalf("failed to create temp dir: %v", err)
 	}
@@ -207,7 +207,7 @@ func TestMCPServerProtocol(t *testing.T) {
 	// Test initialize
 	initRequest := `{"jsonrpc":"2.0","id":1,"method":"initialize","params":{}}`
 
-	cmd := exec.Command("./claude_pp", "serve")
+	cmd := exec.Command("./claude_peepee", "serve")
 	cmd.Env = env
 	cmd.Stdin = strings.NewReader(initRequest + "\n")
 
@@ -243,7 +243,7 @@ func TestMCPServerProtocol(t *testing.T) {
 }
 
 func TestCLIRecallFilters(t *testing.T) {
-	tmpDir, err := os.MkdirTemp("", "claude_pp_filter_test")
+	tmpDir, err := os.MkdirTemp("", "claude_peepee_filter_test")
 	if err != nil {
 		t.Fatalf("failed to create temp dir: %v", err)
 	}
@@ -252,20 +252,20 @@ func TestCLIRecallFilters(t *testing.T) {
 	env := append(os.Environ(), "HOME="+tmpDir)
 
 	// Add multiple facts with different tags
-	cmd1 := exec.Command("./claude_pp", "remember", "Database PostgreSQL", "-t", "database")
+	cmd1 := exec.Command("./claude_peepee", "remember", "Database PostgreSQL", "-t", "database")
 	cmd1.Env = env
 	cmd1.Run()
 
-	cmd2 := exec.Command("./claude_pp", "remember", "API REST endpoints", "-t", "api")
+	cmd2 := exec.Command("./claude_peepee", "remember", "API REST endpoints", "-t", "api")
 	cmd2.Env = env
 	cmd2.Run()
 
-	cmd3 := exec.Command("./claude_pp", "remember", "Frontend React", "-t", "frontend")
+	cmd3 := exec.Command("./claude_peepee", "remember", "Frontend React", "-t", "frontend")
 	cmd3.Env = env
 	cmd3.Run()
 
 	// Test tag filter
-	cmd := exec.Command("./claude_pp", "recall", "-t", "database")
+	cmd := exec.Command("./claude_peepee", "recall", "-t", "database")
 	cmd.Env = env
 	output, _ := cmd.CombinedOutput()
 
@@ -278,7 +278,7 @@ func TestCLIRecallFilters(t *testing.T) {
 	}
 
 	// Test limit
-	cmd = exec.Command("./claude_pp", "recall", "-n", "1")
+	cmd = exec.Command("./claude_peepee", "recall", "-n", "1")
 	cmd.Env = env
 	output, _ = cmd.CombinedOutput()
 
@@ -289,7 +289,7 @@ func TestCLIRecallFilters(t *testing.T) {
 }
 
 func TestDataPersistence(t *testing.T) {
-	tmpDir, err := os.MkdirTemp("", "claude_pp_persist_test")
+	tmpDir, err := os.MkdirTemp("", "claude_peepee_persist_test")
 	if err != nil {
 		t.Fatalf("failed to create temp dir: %v", err)
 	}
@@ -298,18 +298,18 @@ func TestDataPersistence(t *testing.T) {
 	env := append(os.Environ(), "HOME="+tmpDir)
 
 	// Store a fact
-	rememberCmd := exec.Command("./claude_pp", "remember", "Persistent data test")
+	rememberCmd := exec.Command("./claude_peepee", "remember", "Persistent data test")
 	rememberCmd.Env = env
 	rememberCmd.Run()
 
 	// Verify database file exists
-	dbPath := filepath.Join(tmpDir, ".claude_pp", "claude_pp.db")
+	dbPath := filepath.Join(tmpDir, ".claude_peepee", "claude_peepee.db")
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		t.Error("database file should be created")
 	}
 
 	// Recall should still work (data persisted)
-	cmd := exec.Command("./claude_pp", "recall", "Persistent")
+	cmd := exec.Command("./claude_peepee", "recall", "Persistent")
 	cmd.Env = env
 	output, _ := cmd.CombinedOutput()
 
@@ -348,7 +348,7 @@ func TestErrorHandling(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			cmd := exec.Command("./claude_pp", tt.args...)
+			cmd := exec.Command("./claude_peepee", tt.args...)
 			err := cmd.Run()
 
 			if (err != nil) != tt.wantErr {

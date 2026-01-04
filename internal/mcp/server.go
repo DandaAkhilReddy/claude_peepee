@@ -12,7 +12,7 @@ import (
 
 const (
 	MCPVersion = "2024-11-05"
-	ServerName = "claude_pp"
+	ServerName = "claude_peepee"
 	ServerVersion = "0.1.0"
 )
 
@@ -163,7 +163,7 @@ func (s *Server) handleToolsList(req *JSONRPCRequest) {
 		},
 		{
 			"name":        "list_instances",
-			"description": "List all running claude_pp instances across different directories. Useful for discovering other active Claude Code sessions.",
+			"description": "List all running claude_peepee instances across different directories. Useful for discovering other active Claude Code sessions.",
 			"inputSchema": map[string]interface{}{
 				"type":       "object",
 				"properties": map[string]interface{}{},
@@ -171,7 +171,7 @@ func (s *Server) handleToolsList(req *JSONRPCRequest) {
 		},
 		{
 			"name":        "send_message",
-			"description": "Send a message to another running claude_pp instance. Use list_instances first to find available instances.",
+			"description": "Send a message to another running claude_peepee instance. Use list_instances first to find available instances.",
 			"inputSchema": map[string]interface{}{
 				"type": "object",
 				"properties": map[string]interface{}{

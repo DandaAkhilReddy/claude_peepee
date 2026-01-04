@@ -10,9 +10,9 @@ import (
 
 var versionCmd = &cobra.Command{
 	Use:   "version",
-	Short: "Print the version of claude_pp",
+	Short: "Print the version of claude_peepee",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("claude_pp version %s\n", telemetry.Version)
+		fmt.Printf("claude_peepee version %s\n", telemetry.Version)
 		fmt.Printf("Go version: %s\n", runtime.Version())
 		fmt.Printf("OS/Arch: %s/%s\n", runtime.GOOS, runtime.GOARCH)
 	},

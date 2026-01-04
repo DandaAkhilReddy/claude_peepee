@@ -2,16 +2,16 @@
 
 # Build the binary with CGO and FTS5 support
 build:
-	CGO_ENABLED=1 go build -tags "fts5" -o claude_pp .
+	CGO_ENABLED=1 go build -tags "fts5" -o claude_peepee .
 
 # Install to user's bin directory
 install: build
 	mkdir -p ~/.bin
-	cp claude_pp ~/.bin/
+	cp claude_peepee ~/.bin/
 
 # Install globally
 install-global: build
-	sudo cp claude_pp /usr/local/bin/
+	sudo cp claude_peepee /usr/local/bin/
 
 # Run tests
 test:
@@ -29,33 +29,33 @@ lint:
 
 # Run the binary
 run: build
-	./claude_pp
+	./claude_peepee
 
 # Run serve command
 serve: build
-	./claude_pp serve
+	./claude_peepee serve
 
 # Run status command
 status: build
-	./claude_pp status
+	./claude_peepee status
 
 # Clean build artifacts
 clean:
-	rm -f claude_pp
-	rm -f claude_pp-*
+	rm -f claude_peepee
+	rm -f claude_peepee-*
 
 # Build for Linux
 build-linux:
-	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -tags "fts5" -o claude_pp-linux-amd64 .
+	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -tags "fts5" -o claude_peepee-linux-amd64 .
 
 # Build for all platforms
 build-all: build build-linux
-	CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -tags "fts5" -o claude_pp-darwin-arm64 .
-	CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -tags "fts5" -o claude_pp-darwin-amd64 .
+	CGO_ENABLED=1 GOOS=darwin GOARCH=arm64 go build -tags "fts5" -o claude_peepee-darwin-arm64 .
+	CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -tags "fts5" -o claude_peepee-darwin-amd64 .
 
 # Development helpers
 dev-remember: build
-	./claude_pp remember $(FACT)
+	./claude_peepee remember $(FACT)
 
 dev-recall: build
-	./claude_pp recall $(QUERY)
+	./claude_peepee recall $(QUERY)

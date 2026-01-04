@@ -26,7 +26,7 @@ type SQLiteStore struct {
 
 // NewSQLiteStore creates a new SQLite-backed store
 func NewSQLiteStore(dataDir string) (*SQLiteStore, error) {
-	dbPath := filepath.Join(dataDir, "claude_pp.db")
+	dbPath := filepath.Join(dataDir, "claude_peepee.db")
 
 	db, err := sql.Open("sqlite3", dbPath+"?_journal_mode=WAL&_busy_timeout=5000")
 	if err != nil {
