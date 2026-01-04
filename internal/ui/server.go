@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/DandaAkhilReddy/claude_pp/internal/store"
+	"github.com/DandaAkhilReddy/claude_peepee/internal/store"
 )
 
 // Server represents the web UI server

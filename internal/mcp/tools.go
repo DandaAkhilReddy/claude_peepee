@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/DandaAkhilReddy/claude_pp/internal/telemetry"
+	"github.com/DandaAkhilReddy/claude_peepee/internal/telemetry"
 )
 
 const (

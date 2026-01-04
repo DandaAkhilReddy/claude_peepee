@@ -1,4 +1,4 @@
-module github.com/DandaAkhilReddy/claude_pp
+module github.com/DandaAkhilReddy/claude_peepee
 
 go 1.21
 

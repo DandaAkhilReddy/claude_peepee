@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/DandaAkhilReddy/claude_pp/internal/store"
-	"github.com/DandaAkhilReddy/claude_pp/internal/ui"
+	"github.com/DandaAkhilReddy/claude_peepee/internal/store"
+	"github.com/DandaAkhilReddy/claude_peepee/internal/ui"
 	"github.com/spf13/cobra"
 )
 

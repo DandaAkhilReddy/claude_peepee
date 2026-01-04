@@ -4,7 +4,7 @@
 set -e
 
 # Configuration
-REPO="DandaAkhilReddy/claude_pp"
+REPO="DandaAkhilReddy/claude_peepee"
 INSTALL_DIR="${CLAUDE_PP_INSTALL_DIR:-$HOME/.local/bin}"
 
 # Detect OS

@@ -99,17 +99,17 @@ Every time you start a new Claude Code session, you have to re-explain:
 
 **macOS / Linux:**
 ```bash
-curl -sSL https://raw.githubusercontent.com/DandaAkhilReddy/claude_pp/main/install.sh | sh
+curl -sSL https://raw.githubusercontent.com/DandaAkhilReddy/claude_peepee/main/install.sh | sh
 ```
 
 **Windows (PowerShell):**
 ```powershell
-irm https://raw.githubusercontent.com/DandaAkhilReddy/claude_pp/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/DandaAkhilReddy/claude_peepee/main/install.ps1 | iex
 ```
 
 **Go Install:**
 ```bash
-go install github.com/DandaAkhilReddy/claude_pp@latest
+go install github.com/DandaAkhilReddy/claude_peepee@latest
 ```
 
 ### Setup for Claude Code
@@ -303,7 +303,7 @@ All data is stored locally:
 ## 🔧 Build from Source
 
 ```bash
-git clone https://github.com/DandaAkhilReddy/claude_pp.git
+git clone https://github.com/DandaAkhilReddy/claude_peepee.git
 cd claude_pp
 make build
 ./claude_pp version

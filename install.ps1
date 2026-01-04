@@ -3,7 +3,7 @@
 $ErrorActionPreference = "Stop"
 
 # Configuration
-$Repo = "DandaAkhilReddy/claude_pp"
+$Repo = "DandaAkhilReddy/claude_peepee"
 $InstallDir = if ($env:CLAUDE_PP_INSTALL_DIR) { $env:CLAUDE_PP_INSTALL_DIR } else { "$env:USERPROFILE\.local\bin" }
 
 function Get-LatestVersion {

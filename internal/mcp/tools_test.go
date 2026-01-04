@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/DandaAkhilReddy/claude_pp/internal/store"
+	"github.com/DandaAkhilReddy/claude_peepee/internal/store"
 )
 
 func setupTestServer(t *testing.T) (*Server, func()) {

@@ -7,7 +7,7 @@ import (
 	"os"
 	"sync"
 
-	"github.com/DandaAkhilReddy/claude_pp/internal/store"
+	"github.com/DandaAkhilReddy/claude_peepee/internal/store"
 )
 
 const (

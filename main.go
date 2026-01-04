@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/DandaAkhilReddy/claude_pp/cmd"
+	"github.com/DandaAkhilReddy/claude_peepee/cmd"
 )
 
 func main() {

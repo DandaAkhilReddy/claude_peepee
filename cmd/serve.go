@@ -8,8 +8,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/DandaAkhilReddy/claude_pp/internal/mcp"
-	"github.com/DandaAkhilReddy/claude_pp/internal/store"
+	"github.com/DandaAkhilReddy/claude_peepee/internal/mcp"
+	"github.com/DandaAkhilReddy/claude_peepee/internal/store"
 	"github.com/google/uuid"
 	"github.com/spf13/cobra"
 )
