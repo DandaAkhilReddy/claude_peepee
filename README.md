@@ -1,20 +1,57 @@
-# Claude PP - Persistent Memory for Claude Code
+<p align="center">
+  <img src="https://img.shields.io/badge/Go-1.21+-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go Version">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/badge/MCP-Compatible-purple?style=for-the-badge" alt="MCP Compatible">
+  <img src="https://img.shields.io/badge/Platform-macOS%20|%20Linux%20|%20Windows-blue?style=for-the-badge" alt="Platform">
+</p>
 
-**Claude PP** is an MCP (Model Context Protocol) server that gives Claude Code a **persistent brain**. Store facts, decisions, and architectural notes that survive across sessions. Coordinate between multiple Claude Code instances working on different parts of your codebase.
+<h1 align="center">Claude PP</h1>
+<h3 align="center">Persistent Memory for Claude Code</h3>
 
-## What It Does
+<p align="center">
+  <strong>Give Claude Code a brain that remembers across sessions</strong>
+</p>
+
+<p align="center">
+  <a href="#-features">Features</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-usage">Usage</a> •
+  <a href="#-web-ui">Web UI</a> •
+  <a href="#-examples">Examples</a>
+</p>
+
+---
+
+## The Problem
+
+Every time you start a new Claude Code session, you have to re-explain:
+- Your project architecture
+- Coding conventions
+- Past decisions and why you made them
+- Context from previous sessions
+
+**Claude PP solves this.** It gives Claude Code persistent memory that survives across sessions.
+
+---
+
+## ✨ Features
 
 | Feature | Description |
 |---------|-------------|
-| **Persistent Memory** | Store facts, decisions, and context that survive across Claude Code sessions. No more re-explaining your codebase every time. |
-| **Multi-Instance Communication** | Running Claude Code in multiple directories? Instances can discover and message each other. |
-| **Automatic Context** | Load relevant context based on your working directory. Start where you left off. |
+| 🧠 **Persistent Memory** | Store facts, decisions, and context that survive forever |
+| 🔍 **Smart Search** | Full-text search with tag filtering |
+| 💬 **Multi-Instance Chat** | Coordinate between Claude instances in different directories |
+| 🌐 **Web UI** | Beautiful interface to manage your knowledge base |
+| 🔒 **100% Local** | All data stays on your machine |
+| ⚡ **Instant Setup** | One command to get started |
 
-## Quick Start
+---
 
-### 1. Install
+## 🚀 Quick Start
 
-**macOS/Linux:**
+### Install (30 seconds)
+
+**macOS / Linux:**
 ```bash
 curl -sSL https://raw.githubusercontent.com/DandaAkhilReddy/claude_pp/main/install.sh | sh
 ```
@@ -29,327 +66,245 @@ irm https://raw.githubusercontent.com/DandaAkhilReddy/claude_pp/main/install.ps1
 go install github.com/DandaAkhilReddy/claude_pp@latest
 ```
 
-**Build from Source:**
-```bash
-git clone https://github.com/DandaAkhilReddy/claude_pp.git
-cd claude_pp
-make build
-```
-
-### 2. Setup for Claude Code
+### Setup for Claude Code
 
 ```bash
 claude_pp setup
 ```
 
-This adds Claude PP to your Claude Code configuration. That's it!
+**That's it!** Claude Code now has persistent memory.
 
-### 3. Start Using
+---
 
-In Claude Code, you now have access to these tools:
-- `mcp__claude_pp__remember` - Store facts
-- `mcp__claude_pp__recall` - Search facts
-- `mcp__claude_pp__get_context` - Load all context
-- `mcp__claude_pp__list_instances` - Find other instances
-- `mcp__claude_pp__send_message` - Message other instances
-- `mcp__claude_pp__get_messages` - Read messages
+## 📖 Usage
 
-## CLI Commands
-
-Claude PP also works as a standalone CLI:
-
-### Remember - Store Facts
+### Store Knowledge
 
 ```bash
-# Store a simple fact
-claude_pp remember "This project uses PostgreSQL for persistence"
+# Remember a fact
+claude_pp remember "We use PostgreSQL 15 with TimescaleDB extension"
 
-# Store with tags for easy filtering
-claude_pp remember "API rate limit is 100 req/min" -t api -t config
+# Add tags for easy filtering
+claude_pp remember "API rate limit is 100 req/min per user" -t api -t limits
 
 # Store architectural decisions
-claude_pp remember "We chose microservices over monolith for scalability" -t architecture -t decision
+claude_pp remember "Chose microservices for independent scaling" -t architecture -t decision
 ```
 
-### Recall - Search Facts
+### Search Knowledge
 
 ```bash
 # Search by keyword
 claude_pp recall database
-# Output:
-# #1 [2026-01-04 04:58]
-# Tags: database, architecture
-# Dir: /home/user/myproject
-# Project uses PostgreSQL for the database
 
 # Filter by tag
-claude_pp recall -t api
+claude_pp recall -t architecture
 
-# Show only facts from current directory
-claude_pp recall -l
+# Combine search + tags
+claude_pp recall authentication -t security
 
 # Limit results
 claude_pp recall -n 5
-
-# Combine filters
-claude_pp recall authentication -t security -n 10
 ```
 
-### Status - Check Your Memory
+### Check Status
 
 ```bash
 claude_pp status
-# Output:
-# Claude PP Status
-# ================
-#
-# Data directory: /home/user/.claude_pp
-# Working directory: /home/user/myproject
-#
-# Facts:
-#   Total: 15
-#   Local (this directory): 8
-#
-# Running instances: 2
-#   - abc123: /home/user/myproject/frontend
-#   - def456: /home/user/myproject/backend
 ```
 
-### Instances - Multi-Instance Coordination
-
-```bash
-# List all running Claude Code instances
-claude_pp instances
-# Output:
-# Running instances (2):
-#
-# ID: abc123
-#   PID: 12345
-#   Dir: /home/user/myproject/frontend
-#   Started: 2026-01-04 10:30:00
-#   Last heartbeat: 2026-01-04 10:35:00
-#
-# ID: def456
-#   PID: 12346
-#   Dir: /home/user/myproject/backend
-#   Started: 2026-01-04 10:32:00
-#   Last heartbeat: 2026-01-04 10:35:00
+Output:
 ```
+Claude PP Status
+================
 
-### Send & Messages - Cross-Instance Communication
+Data directory: ~/.claude_pp
+Working directory: /projects/myapp
 
-```bash
-# Send a message to another instance
-claude_pp send abc123 "I'm updating the API types, hold off on frontend changes"
-# Output: Message #1 sent to abc123 (/home/user/myproject/frontend)
+Facts:
+  Total: 42
+  Local (this directory): 15
 
-# Check messages for an instance
-claude_pp messages abc123
-# Output:
-# #1 [2026-01-04 10:36] from def456 (unread)
-# Backend API changes complete, you can update types now
-
-# Show all messages (including read)
-claude_pp messages abc123 -a
+Running instances: 2
+  - a1b2c3: /projects/myapp/frontend
+  - d4e5f6: /projects/myapp/backend
 ```
-
-## Setup Options
-
-### Claude Code (Default)
-
-```bash
-# Global setup (recommended)
-claude_pp setup
-
-# Project-specific setup
-claude_pp setup --project
-
-# Pre-approve all Claude PP commands (no confirmation prompts)
-claude_pp setup --allow-all
-```
-
-### Other AI Coding Tools
-
-```bash
-# OpenCode
-claude_pp setup --opencode
-
-# Codex CLI
-claude_pp setup --codex
-
-# Gemini CLI
-claude_pp setup --gemini
-```
-
-## MCP Tools Reference
-
-When using Claude PP through Claude Code, these MCP tools are available:
-
-### `mcp__claude_pp__remember`
-
-Store a fact, decision, or piece of context.
-
-**Parameters:**
-- `fact` (required): The information to store
-- `tags` (optional): Array of tags for categorization
-
-**Example:**
-```
-mcp__claude_pp__remember(
-  fact="Database migrations run automatically on deploy",
-  tags=["database", "deployment"]
-)
-```
-
-### `mcp__claude_pp__recall`
-
-Search for previously stored facts.
-
-**Parameters:**
-- `query` (optional): Search keywords
-- `tags` (optional): Filter by tags
-- `limit` (optional): Max results (default: 20)
-
-**Example:**
-```
-mcp__claude_pp__recall(query="authentication", tags=["security"])
-```
-
-### `mcp__claude_pp__get_context`
-
-Load all relevant context for the current directory. Returns local facts and recent global facts.
-
-**Parameters:** None
-
-### `mcp__claude_pp__list_instances`
-
-List all running Claude PP instances across directories.
-
-**Parameters:** None
-
-### `mcp__claude_pp__send_message`
-
-Send a message to another instance.
-
-**Parameters:**
-- `to_instance` (required): Instance ID from list_instances
-- `message` (required): Message content
-
-### `mcp__claude_pp__get_messages`
-
-Get messages sent to this instance.
-
-**Parameters:**
-- `unread_only` (optional): Only unread messages (default: true)
-
-## Example Use Cases
-
-### 1. Remembering Architectural Decisions
-
-```bash
-claude_pp remember "We use event sourcing for the order system because we need full audit trails" -t architecture -t orders
-claude_pp remember "Redis is used for caching with 1hr TTL for user profiles" -t cache -t performance
-claude_pp remember "All API endpoints require JWT auth except /health and /metrics" -t api -t security
-```
-
-### 2. Project Conventions
-
-```bash
-claude_pp remember "File naming: kebab-case for files, PascalCase for components" -t conventions
-claude_pp remember "All database columns use snake_case" -t conventions -t database
-claude_pp remember "Error messages should be user-friendly, log technical details" -t conventions -t errors
-```
-
-### 3. Monorepo Coordination
-
-Terminal 1 (Backend):
-```bash
-claude_pp instances
-# See frontend instance: abc123
-claude_pp send abc123 "Deploying new API version, expect brief downtime"
-```
-
-Terminal 2 (Frontend):
-```bash
-claude_pp messages abc123
-# See message from backend about deployment
-```
-
-### 4. Session Continuity
-
-At the start of each Claude Code session:
-```
-Use mcp__claude_pp__get_context to load previous context
-```
-
-This retrieves all facts stored for the current directory plus recent global facts.
-
-## Data Storage
-
-All data is stored locally in `~/.claude_pp/` using SQLite:
-
-```
-~/.claude_pp/
-└── claude_pp.db    # SQLite database with facts, instances, messages
-```
-
-Your data never leaves your machine.
-
-## Privacy & Telemetry
-
-Claude PP includes optional telemetry to help improve the tool. **No personal data, file contents, or stored facts are ever collected.**
-
-Telemetry is **disabled by default**. If enabled in the future, you can opt out:
-
-```bash
-export CLAUDE_PP_NO_TELEMETRY=1
-# or
-export DO_NOT_TRACK=1
-```
-
-## Requirements
-
-- Go 1.21+ (for building from source)
-- CGO enabled (for SQLite with FTS5 full-text search)
-- Claude Code, OpenCode, Codex CLI, or Gemini CLI
-
-## Troubleshooting
-
-### "command not found: claude_pp"
-
-Add the install directory to your PATH:
-```bash
-export PATH="$PATH:$HOME/.local/bin"
-```
-
-### "failed to open database"
-
-Ensure the data directory exists:
-```bash
-mkdir -p ~/.claude_pp
-```
-
-### MCP tools not showing in Claude Code
-
-Re-run setup:
-```bash
-claude_pp setup
-```
-
-Then restart Claude Code.
-
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
-## Credits
-
-Inspired by [Clauder](https://github.com/MaorBril/clauder) by Maor Bril.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ---
 
-**Claude PP** - Because Claude Code deserves a memory.
+## 🌐 Web UI
+
+Claude PP includes a beautiful web interface to manage your knowledge base.
+
+```bash
+claude_pp ui
+```
+
+Then open http://localhost:8420 in your browser.
+
+**Features:**
+- View and search all stored facts
+- Add new facts with tags
+- Delete outdated information
+- See running instances
+- Real-time updates
+
+---
+
+## 🛠️ MCP Tools
+
+When using Claude Code, these tools are automatically available:
+
+| Tool | Description |
+|------|-------------|
+| `mcp__claude_pp__remember` | Store a fact with optional tags |
+| `mcp__claude_pp__recall` | Search stored facts |
+| `mcp__claude_pp__get_context` | Load all context for current directory |
+| `mcp__claude_pp__list_instances` | Find other running Claude instances |
+| `mcp__claude_pp__send_message` | Send message to another instance |
+| `mcp__claude_pp__get_messages` | Receive messages from other instances |
+
+---
+
+## 💡 Examples
+
+### 1. Project Setup Memory
+
+```bash
+# Store your tech stack
+claude_pp remember "Frontend: React 18 + TypeScript + Vite" -t stack -t frontend
+claude_pp remember "Backend: Go 1.21 + Gin + GORM" -t stack -t backend
+claude_pp remember "Database: PostgreSQL 15 + Redis 7" -t stack -t database
+claude_pp remember "Deployment: Docker + Kubernetes on AWS EKS" -t stack -t devops
+```
+
+### 2. Coding Conventions
+
+```bash
+claude_pp remember "Use kebab-case for file names" -t convention
+claude_pp remember "All API responses use { data, error, meta } format" -t convention -t api
+claude_pp remember "Tests go in __tests__ folder next to source" -t convention -t testing
+```
+
+### 3. Architecture Decisions
+
+```bash
+claude_pp remember "ADR-001: Use event sourcing for order history - need full audit trail" -t adr
+claude_pp remember "ADR-002: Redis for sessions - need sub-ms latency" -t adr
+claude_pp remember "ADR-003: Separate auth service - security isolation" -t adr
+```
+
+### 4. Monorepo Coordination
+
+**Terminal 1 (Backend):**
+```bash
+claude_pp instances
+# Shows: frontend instance abc123
+
+claude_pp send abc123 "API contract updated - new field 'metadata' on User"
+```
+
+**Terminal 2 (Frontend):**
+```bash
+claude_pp messages abc123
+# Shows: "API contract updated - new field 'metadata' on User"
+```
+
+---
+
+## ⚙️ Configuration
+
+### Setup Options
+
+```bash
+# Claude Code (default - global)
+claude_pp setup
+
+# Claude Code (project only)
+claude_pp setup --project
+
+# Pre-approve all commands
+claude_pp setup --allow-all
+
+# Other AI tools
+claude_pp setup --opencode
+claude_pp setup --codex
+claude_pp setup --gemini
+```
+
+### Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `CLAUDE_PP_NO_TELEMETRY` | Disable telemetry (set to `1`) |
+| `DO_NOT_TRACK` | Disable telemetry (standard) |
+
+---
+
+## 📁 Data Storage
+
+All data is stored locally:
+
+```
+~/.claude_pp/
+└── claude_pp.db    # SQLite database
+```
+
+**Your data never leaves your machine.**
+
+---
+
+## 🔧 Build from Source
+
+```bash
+git clone https://github.com/DandaAkhilReddy/claude_pp.git
+cd claude_pp
+make build
+./claude_pp version
+```
+
+---
+
+## 📋 Commands Reference
+
+| Command | Description |
+|---------|-------------|
+| `claude_pp remember <fact>` | Store a fact |
+| `claude_pp recall [query]` | Search facts |
+| `claude_pp status` | Show status |
+| `claude_pp instances` | List running instances |
+| `claude_pp send <id> <msg>` | Send message |
+| `claude_pp messages <id>` | View messages |
+| `claude_pp setup` | Configure for AI tools |
+| `claude_pp ui` | Open web interface |
+| `claude_pp version` | Show version |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+---
+
+## 🔒 Security
+
+See [SECURITY.md](SECURITY.md) for security policy and reporting vulnerabilities.
+
+---
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+## 🙏 Credits
+
+Inspired by [Clauder](https://github.com/MaorBril/clauder) by Maor Bril.
+
+---
+
+<p align="center">
+  <strong>Claude PP</strong> - Because Claude Code deserves a memory
+</p>

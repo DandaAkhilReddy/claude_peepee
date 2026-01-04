@@ -45,6 +45,7 @@ func init() {
 	rootCmd.AddCommand(statusCmd)
 	rootCmd.AddCommand(setupCmd)
 	rootCmd.AddCommand(versionCmd)
+	rootCmd.AddCommand(uiCmd)
 }
 
 // getDataDir returns the data directory path
