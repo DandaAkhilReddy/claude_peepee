@@ -39,7 +39,7 @@ func (s *Server) Start() error {
 	mux.HandleFunc("/api/status", s.handleStatus)
 
 	addr := fmt.Sprintf(":%d", s.port)
-	fmt.Printf("\n  Claude PP Web UI\n")
+	fmt.Printf("\n  Claude PeePee Web UI\n")
 	fmt.Printf("  ─────────────────\n")
 	fmt.Printf("  Local:   http://localhost%s\n\n", addr)
 	fmt.Printf("  Press Ctrl+C to stop\n\n")
@@ -194,7 +194,7 @@ const indexHTML = `<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude PP - Knowledge Base</title>
+    <title>Claude PeePee - Knowledge Base</title>
     <style>
         * {
             margin: 0;
@@ -477,7 +477,7 @@ const indexHTML = `<!DOCTYPE html>
 <body>
     <div class="container">
         <header>
-            <h1>🧠 Claude PP</h1>
+            <h1>🧠 Claude PeePee</h1>
             <p class="subtitle">Persistent Memory for Claude Code</p>
         </header>
 
@@ -604,7 +604,7 @@ const indexHTML = `<!DOCTYPE html>
                 const container = document.getElementById('instances-list');
 
                 if (!data.instances || data.instances.length === 0) {
-                    container.innerHTML = '<div class="empty-state"><h3>No running instances</h3><p>Start Claude Code with Claude PP to see instances here.</p></div>';
+                    container.innerHTML = '<div class="empty-state"><h3>No running instances</h3><p>Start Claude Code with Claude PeePee to see instances here.</p></div>';
                     return;
                 }
 

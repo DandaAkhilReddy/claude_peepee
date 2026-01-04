@@ -46,7 +46,7 @@ func runStatus(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to get instances: %w", err)
 	}
 
-	fmt.Printf("Claude PP Status\n")
+	fmt.Printf("Claude PeePee Status\n")
 	fmt.Printf("================\n\n")
 	fmt.Printf("Data directory: %s\n", dataDir)
 	fmt.Printf("Working directory: %s\n\n", workingDir)

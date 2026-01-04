@@ -163,7 +163,7 @@ func setupForClaudeCode(binaryPath string) error {
 	if setupProject {
 		scope = "for this project"
 	}
-	fmt.Printf("Claude PP configured %s for Claude Code.\n", scope)
+	fmt.Printf("Claude PeePee configured %s for Claude Code.\n", scope)
 	fmt.Printf("Config file: %s\n", configPath)
 
 	// Create/update CLAUDE.md
@@ -215,7 +215,7 @@ func setupForOpenCode(binaryPath string) error {
 		return fmt.Errorf("failed to write config: %w", err)
 	}
 
-	fmt.Println("Claude PP configured for OpenCode.")
+	fmt.Println("Claude PeePee configured for OpenCode.")
 	fmt.Printf("Config file: %s\n", configPath)
 
 	return nil
@@ -262,7 +262,7 @@ func setupForCodex(binaryPath string) error {
 		return fmt.Errorf("failed to write config: %w", err)
 	}
 
-	fmt.Println("Claude PP configured for Codex CLI.")
+	fmt.Println("Claude PeePee configured for Codex CLI.")
 	fmt.Printf("Config file: %s\n", configPath)
 
 	return nil
@@ -309,7 +309,7 @@ func setupForGemini(binaryPath string) error {
 		return fmt.Errorf("failed to write config: %w", err)
 	}
 
-	fmt.Println("Claude PP configured for Gemini CLI.")
+	fmt.Println("Claude PeePee configured for Gemini CLI.")
 	fmt.Printf("Config file: %s\n", configPath)
 
 	return nil
@@ -322,9 +322,9 @@ func updateClaudeMD() error {
 	}
 
 	claudeMDPath := filepath.Join(cwd, "CLAUDE.md")
-	content := `# Claude PP - Persistent Memory
+	content := `# Claude PeePee - Persistent Memory
 
-This project uses Claude PP for persistent memory across Claude Code sessions.
+This project uses Claude PeePee for persistent memory across Claude Code sessions.
 
 ## Available Tools
 
@@ -345,7 +345,7 @@ This project uses Claude PP for persistent memory across Claude Code sessions.
 
 	// Check if file exists and contains our content
 	if data, err := os.ReadFile(claudeMDPath); err == nil {
-		if strings.Contains(string(data), "Claude PP") {
+		if strings.Contains(string(data), "Claude PeePee") {
 			return nil // Already configured
 		}
 		// Append to existing file

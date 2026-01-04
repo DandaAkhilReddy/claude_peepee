@@ -15,7 +15,7 @@ var uiCmd = &cobra.Command{
 	Use:   "ui",
 	Short: "Start the web UI for managing facts",
 	Long: `Start a local web server that provides a user-friendly interface
-for viewing and managing your Claude PP knowledge base.
+for viewing and managing your Claude PeePee knowledge base.
 
 The UI allows you to:
   - Browse and search all stored facts

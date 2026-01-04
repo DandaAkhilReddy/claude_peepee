@@ -21,7 +21,7 @@ var (
 func Init() {
 	initOnce.Do(func() {
 		// Check for opt-out
-		if os.Getenv("CLAUDE_PP_NO_TELEMETRY") == "1" || os.Getenv("DO_NOT_TRACK") == "1" {
+		if os.Getenv("CLAUDE_PEEPEE_NO_TELEMETRY") == "1" || os.Getenv("DO_NOT_TRACK") == "1" {
 			disabled = true
 			return
 		}

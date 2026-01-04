@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/Tokens-Saved%20💰-gold?style=for-the-badge" alt="Token Efficient">
 </p>
 
-<h1 align="center">🧠 Claude PP</h1>
+<h1 align="center">🧠 Claude PeePee</h1>
 <h3 align="center">Persistent Memory for Claude Code</h3>
 
 <p align="center">
@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <a href="#-why-pp">Why PP?</a> •
+  <a href="#-why-peepee">Why PeePee?</a> •
   <a href="#-features">Features</a> •
   <a href="#-quick-start">Quick Start</a> •
   <a href="#-token-savings">Token Savings</a> •
@@ -27,11 +27,11 @@
 
 ---
 
-## 🚽 Why "PP"?
+## 🚽 Why "PeePee"?
 
-Like a child's first lesson in breaking things down into manageable pieces (*pee-pee* 🚽), **Claude PP** helps you break down your massive project context into small, digestible, reusable tokens!
+Like a child's first lesson in breaking things down into manageable pieces (*pee-pee* 🚽), **Claude PeePee** helps you break down your massive project context into small, digestible, reusable tokens!
 
-Instead of dumping your entire project history into every conversation (expensive!), PP lets you:
+Instead of dumping your entire project history into every conversation (expensive!), PeePee lets you:
 - **Fragment** large context into tagged facts
 - **Store** only what matters
 - **Retrieve** just what's needed
@@ -45,7 +45,7 @@ Instead of dumping your entire project history into every conversation (expensiv
 
 **The Real Problem: Token Waste**
 
-| Without Claude PP | With Claude PP |
+| Without Claude PeePee | With Claude PeePee |
 |-------------------|----------------|
 | Re-explain project structure every session | Stored once, recalled instantly |
 | Copy-paste same conventions repeatedly | Tagged and searchable |
@@ -59,7 +59,7 @@ Traditional approach:
    PostgreSQL database, Redis caching, Docker deployment..."
   = 500+ tokens EVERY session
 
-With Claude PP:
+With Claude PeePee:
   claude_peepee recall -t stack
   = 50 tokens (just the search) + relevant results only
 ```
@@ -76,7 +76,7 @@ Every time you start a new Claude Code session, you have to re-explain:
 - Past decisions and why you made them
 - Context from previous sessions
 
-**Claude PP solves this.** It gives Claude Code persistent memory that survives across sessions.
+**Claude PeePee solves this.** It gives Claude Code persistent memory that survives across sessions.
 
 ---
 
@@ -106,7 +106,7 @@ Every time you start a new Claude Code session, you have to re-explain:
 │                              │                                       │
 │                              ▼                                       │
 │  ┌─────────────────────────────────────────────────────────────┐   │
-│  │                    Claude PP MCP Server                      │   │
+│  │                    Claude PeePee MCP Server                      │   │
 │  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │   │
 │  │  │  Remember   │  │   Recall    │  │  Instance Messaging │  │   │
 │  │  │  (Store)    │  │  (Search)   │  │   (Coordination)    │  │   │
@@ -123,14 +123,14 @@ Every time you start a new Claude Code session, you have to re-explain:
 
 ### Step-by-Step Flow
 
-1. **You start Claude Code** → Claude PP MCP server starts automatically
+1. **You start Claude Code** → Claude PeePee MCP server starts automatically
 2. **Claude needs context** → Calls `get_context` to load relevant facts
 3. **You make decisions** → Claude stores them using `remember`
 4. **Next session** → Previous facts are instantly available via `recall`
 
 ### What Data Is Saved
 
-Claude PP stores everything in a local SQLite database with full-text search capabilities:
+Claude PeePee stores everything in a local SQLite database with full-text search capabilities:
 
 | Data Type | What's Stored | Example |
 |-----------|--------------|---------|
@@ -179,10 +179,10 @@ messages (
 
 ### The MCP Protocol
 
-Claude PP uses the **Model Context Protocol (MCP)** - a standardized way for AI assistants to access external tools:
+Claude PeePee uses the **Model Context Protocol (MCP)** - a standardized way for AI assistants to access external tools:
 
 ```
-Claude Code                    Claude PP Server
+Claude Code                    Claude PeePee Server
     │                                │
     │ ─── initialize request ───────>│
     │ <── capabilities response ─────│
@@ -211,7 +211,7 @@ Every session, you type:
 = 500+ tokens × every session = 💸💸💸
 ```
 
-**With Claude PP** (efficient):
+**With Claude PeePee** (efficient):
 ```
 Session 1: claude_peepee remember "React 18 + TypeScript project" -t stack
            (stored once: ~10 tokens)
@@ -305,7 +305,7 @@ claude_peepee status
 
 Output:
 ```
-Claude PP Status
+Claude PeePee Status
 ================
 
 Data directory: ~/.claude_peepee
@@ -324,7 +324,7 @@ Running instances: 2
 
 ## 🌐 Web UI
 
-Claude PP includes a beautiful web interface to manage your knowledge base.
+Claude PeePee includes a beautiful web interface to manage your knowledge base.
 
 ```bash
 claude_peepee ui
@@ -426,7 +426,7 @@ claude_peepee setup --gemini
 
 | Variable | Description |
 |----------|-------------|
-| `CLAUDE_PP_NO_TELEMETRY` | Disable telemetry (set to `1`) |
+| `CLAUDE_PEEPEE_NO_TELEMETRY` | Disable telemetry (set to `1`) |
 | `DO_NOT_TRACK` | Disable telemetry (standard) |
 
 ---
@@ -532,7 +532,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 ---
 
 <p align="center">
-  <strong>🧠 Claude PP</strong> - Because Claude Code deserves a memory
+  <strong>🧠 Claude PeePee</strong> - Because Claude Code deserves a memory
 </p>
 <p align="center">
   <em>Break it down. Store it smart. Save those tokens! 💰</em>

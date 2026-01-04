@@ -17,7 +17,7 @@ import (
 var serveCmd = &cobra.Command{
 	Use:   "serve",
 	Short: "Start the MCP server",
-	Long:  `Start the Claude PP MCP server for Claude Code integration.`,
+	Long:  `Start the Claude PeePee MCP server for Claude Code integration.`,
 	RunE:  runServe,
 }
 

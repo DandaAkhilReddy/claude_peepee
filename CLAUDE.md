@@ -1,6 +1,6 @@
-# Claude PP - Persistent Memory MCP
+# Claude PeePee - Persistent Memory MCP
 
-This project provides Claude PP, an MCP server for persistent memory across Claude Code sessions.
+This project provides Claude PeePee, an MCP server for persistent memory across Claude Code sessions.
 
 ## Available Tools
 

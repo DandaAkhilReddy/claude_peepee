@@ -11,8 +11,8 @@ import (
 
 var rootCmd = &cobra.Command{
 	Use:   "claude_peepee",
-	Short: "Claude PP - Persistent Memory for Claude Code",
-	Long: `Claude PP is an MCP server that provides AI coding tools with
+	Short: "Claude PeePee - Persistent Memory for Claude Code",
+	Long: `Claude PeePee is an MCP server that provides AI coding tools with
 persistent memory and multi-instance communication.
 
 Features:

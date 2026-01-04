@@ -160,7 +160,7 @@ func TestCLIStatus(t *testing.T) {
 	}
 
 	expectedStrings := []string{
-		"Claude PP Status",
+		"Claude PeePee Status",
 		"Data directory:",
 		"Working directory:",
 		"Facts:",

@@ -1,11 +1,11 @@
 #!/bin/sh
-# Claude PP installation script for macOS and Linux
+# Claude PeePee installation script for macOS and Linux
 
 set -e
 
 # Configuration
 REPO="DandaAkhilReddy/claude_peepee"
-INSTALL_DIR="${CLAUDE_PP_INSTALL_DIR:-$HOME/.local/bin}"
+INSTALL_DIR="${CLAUDE_PEEPEE_INSTALL_DIR:-$HOME/.local/bin}"
 
 # Detect OS
 detect_os() {
@@ -80,7 +80,7 @@ main() {
     chmod +x "${INSTALL_DIR}/claude_peepee"
 
     echo ""
-    echo "Claude PP installed to ${INSTALL_DIR}/claude_peepee"
+    echo "Claude PeePee installed to ${INSTALL_DIR}/claude_peepee"
 
     # Check if install dir is in PATH
     case ":$PATH:" in

@@ -1,10 +1,10 @@
-# Claude PP installation script for Windows
+# Claude PeePee installation script for Windows
 
 $ErrorActionPreference = "Stop"
 
 # Configuration
 $Repo = "DandaAkhilReddy/claude_peepee"
-$InstallDir = if ($env:CLAUDE_PP_INSTALL_DIR) { $env:CLAUDE_PP_INSTALL_DIR } else { "$env:USERPROFILE\.local\bin" }
+$InstallDir = if ($env:CLAUDE_PEEPEE_INSTALL_DIR) { $env:CLAUDE_PEEPEE_INSTALL_DIR } else { "$env:USERPROFILE\.local\bin" }
 
 function Get-LatestVersion {
     try {
@@ -16,7 +16,7 @@ function Get-LatestVersion {
 }
 
 function Main {
-    Write-Host "Claude PP Installer for Windows"
+    Write-Host "Claude PeePee Installer for Windows"
     Write-Host ""
 
     # Detect architecture
@@ -49,7 +49,7 @@ function Main {
     }
 
     Write-Host ""
-    Write-Host "Claude PP installed to $installPath"
+    Write-Host "Claude PeePee installed to $installPath"
 
     # Check if install dir is in PATH
     $currentPath = [Environment]::GetEnvironmentVariable("PATH", "User")
