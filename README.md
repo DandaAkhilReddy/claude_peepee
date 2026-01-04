@@ -294,6 +294,51 @@ claude_peepee setup
 
 ---
 
+## 🔌 Connect via Claude Connectors (Remote Mode)
+
+Want to use Claude PeePee with Claude Desktop or Claude Web? Use the remote MCP server mode!
+
+### Step 1: Start the Remote Server
+
+```bash
+claude_peepee serve-remote
+```
+
+This starts an HTTP server on `http://127.0.0.1:8421`
+
+### Step 2: Add to Claude Connectors
+
+1. **Open Claude** (Desktop or Web app)
+2. Click the **Settings** icon (⚙️ gear)
+3. Navigate to **"Connectors"** in the sidebar
+4. Click **"Add Custom Connector"**
+5. Fill in the details:
+   - **Name:** `Claude PeePee`
+   - **URL:** `http://127.0.0.1:8421/sse`
+6. Click **"Add"** to save
+
+### Step 3: Start Chatting!
+
+Claude now has access to your persistent memory. Try:
+- *"Remember that we use PostgreSQL for our database"*
+- *"What do you know about our project?"*
+- *"Recall anything about our API"*
+
+### Remote Server Options
+
+```bash
+# Start on a custom port
+claude_peepee serve-remote -p 3000
+
+# Listen on all interfaces (for remote access)
+claude_peepee serve-remote --host 0.0.0.0
+
+# Visit the web interface for setup instructions
+open http://127.0.0.1:8421
+```
+
+---
+
 ## 📖 Usage
 
 ### Store Knowledge
@@ -494,6 +539,7 @@ make build
 | `claude_peepee send <id> <msg>` | Send message |
 | `claude_peepee messages <id>` | View messages |
 | `claude_peepee setup` | Configure for AI tools |
+| `claude_peepee serve-remote` | Start remote MCP server (for Connectors) |
 | `claude_peepee ui` | Open web interface |
 | `claude_peepee version` | Show version |
 

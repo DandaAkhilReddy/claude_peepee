@@ -294,3 +294,127 @@ func formatResult(result interface{}) string {
 	}
 	return string(data)
 }
+
+// GetToolDefinitions returns the list of available tools (for remote server)
+func GetToolDefinitions() []map[string]interface{} {
+	return []map[string]interface{}{
+		{
+			"name":        "remember",
+			"description": "Store a fact, decision, or piece of context that should persist across Claude Code sessions.",
+			"inputSchema": map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"fact": map[string]interface{}{
+						"type":        "string",
+						"description": "The fact, decision, or context to remember",
+					},
+					"tags": map[string]interface{}{
+						"type":        "array",
+						"items":       map[string]interface{}{"type": "string"},
+						"description": "Optional tags to categorize this fact",
+					},
+				},
+				"required": []string{"fact"},
+			},
+		},
+		{
+			"name":        "recall",
+			"description": "Search for previously stored facts using keywords or tags.",
+			"inputSchema": map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"query": map[string]interface{}{
+						"type":        "string",
+						"description": "Search query to find relevant facts",
+					},
+					"tags": map[string]interface{}{
+						"type":        "array",
+						"items":       map[string]interface{}{"type": "string"},
+						"description": "Filter by specific tags",
+					},
+					"limit": map[string]interface{}{
+						"type":        "integer",
+						"description": "Maximum number of results (default: 20)",
+					},
+				},
+			},
+		},
+		{
+			"name":        "get_context",
+			"description": "Get all relevant context for the current working directory.",
+			"inputSchema": map[string]interface{}{
+				"type":       "object",
+				"properties": map[string]interface{}{},
+			},
+		},
+		{
+			"name":        "list_instances",
+			"description": "List all running claude_peepee instances.",
+			"inputSchema": map[string]interface{}{
+				"type":       "object",
+				"properties": map[string]interface{}{},
+			},
+		},
+		{
+			"name":        "send_message",
+			"description": "Send a message to another running instance.",
+			"inputSchema": map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"to_instance": map[string]interface{}{
+						"type":        "string",
+						"description": "The ID of the target instance",
+					},
+					"message": map[string]interface{}{
+						"type":        "string",
+						"description": "The message content",
+					},
+				},
+				"required": []string{"to_instance", "message"},
+			},
+		},
+		{
+			"name":        "get_messages",
+			"description": "Get messages sent to this instance.",
+			"inputSchema": map[string]interface{}{
+				"type": "object",
+				"properties": map[string]interface{}{
+					"unread_only": map[string]interface{}{
+						"type":        "boolean",
+						"description": "Only return unread messages (default: true)",
+					},
+				},
+			},
+		},
+	}
+}
+
+// ProcessRequest processes a single MCP request (for remote server)
+func (s *Server) ProcessRequest(data []byte) {
+	var req JSONRPCRequest
+	if err := json.Unmarshal(data, &req); err != nil {
+		s.sendError(nil, -32700, "Parse error", err.Error())
+		return
+	}
+	s.handleRequest(&req)
+}
+
+// ExecuteTool executes a tool and returns the result (for remote server)
+func (s *Server) ExecuteTool(name string, args map[string]interface{}) (interface{}, error) {
+	switch name {
+	case "remember":
+		return s.handleRemember(args)
+	case "recall":
+		return s.handleRecall(args)
+	case "get_context":
+		return s.handleGetContext(args)
+	case "list_instances":
+		return s.handleListInstances(args)
+	case "send_message":
+		return s.handleSendMessage(args)
+	case "get_messages":
+		return s.handleGetMessages(args)
+	default:
+		return nil, fmt.Errorf("unknown tool: %s", name)
+	}
+}

@@ -37,6 +37,7 @@ func Execute() error {
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
+	rootCmd.AddCommand(serveRemoteCmd)
 	rootCmd.AddCommand(rememberCmd)
 	rootCmd.AddCommand(recallCmd)
 	rootCmd.AddCommand(instancesCmd)
