@@ -283,7 +283,49 @@ make build
 
 ## 🤝 Contributing
 
-Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+We love contributions! Whether you're fixing bugs, adding features, or improving docs - all help is welcome.
+
+### Quick Start for Contributors
+
+```bash
+# 1. Fork and clone
+git clone https://github.com/YOUR_USERNAME/claude_pp.git
+cd claude_pp
+
+# 2. Install dependencies
+go mod download
+
+# 3. Build
+make build
+
+# 4. Run tests
+make test
+
+# 5. Make your changes and submit a PR!
+```
+
+### Ways to Contribute
+
+| Type | Description |
+|------|-------------|
+| Bug Reports | Found a bug? Open an issue with steps to reproduce |
+| Feature Requests | Have an idea? We'd love to hear it |
+| Code | Fix bugs, add features, improve performance |
+| Documentation | Improve README, add examples, fix typos |
+| Testing | Add test cases, improve coverage |
+
+### Good First Issues
+
+New to the project? Look for issues labeled `good first issue` - they're perfect for getting started!
+
+### Development Guidelines
+
+- Follow Go best practices and `gofmt`
+- Add tests for new features
+- Keep commits focused and descriptive
+- Update docs if needed
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ---
 
@@ -299,12 +341,9 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-## 🙏 Credits
-
-Inspired by [Clauder](https://github.com/MaorBril/clauder) by Maor Bril.
-
----
-
 <p align="center">
   <strong>Claude PP</strong> - Because Claude Code deserves a memory
+</p>
+<p align="center">
+  Made with care for the developer community
 </p>
