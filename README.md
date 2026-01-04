@@ -29,15 +29,43 @@
 
 ## 🚽 Why "PeePee"?
 
-Like a child's first lesson in breaking things down into manageable pieces (*pee-pee* 🚽), **Claude PeePee** helps you break down your massive project context into small, digestible, reusable tokens!
+Think about how a child's body works: food goes in, the body **absorbs the useful nutrients**, and the waste (pee-pee 🚽) gets flushed out. Simple, efficient, natural!
 
-Instead of dumping your entire project history into every conversation (expensive!), PeePee lets you:
-- **Fragment** large context into tagged facts
-- **Store** only what matters
-- **Retrieve** just what's needed
+**Claude PeePee works the same way for your AI conversations:**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    YOUR PROJECT CONTEXT                      │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │  Massive codebase, hundreds of decisions,            │    │
+│  │  conventions, architecture notes, past discussions... │    │
+│  └─────────────────────────────────────────────────────┘    │
+│                           │                                  │
+│                           ▼                                  │
+│                  ┌─────────────────┐                        │
+│                  │  Claude PeePee  │                        │
+│                  │    (Filter)     │                        │
+│                  └─────────────────┘                        │
+│                     │           │                            │
+│           ┌─────────┘           └─────────┐                  │
+│           ▼                               ▼                  │
+│   🚽 FLUSH OUT                    🧠 KEEP & STORE            │
+│   ─────────────                   ─────────────              │
+│   • Redundant context             • Key decisions            │
+│   • Repeated explanations         • Architecture notes       │
+│   • Token waste                   • Important facts          │
+│   • Session bloat                 • Tagged knowledge         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**The result?** Only the **useful nutrients** (relevant facts) flow into each conversation, while the **waste** (redundant tokens) gets flushed away!
+
+- **Filter out** unnecessary repetition
+- **Absorb** only what matters into persistent memory
+- **Retrieve** just the relevant context when needed
 - **Save tokens** = Save money 💰
 
-> *"Don't flood the conversation - just let it flow in small, efficient streams!"*
+> *"Flush the waste, keep the knowledge!"*
 
 ---
 
