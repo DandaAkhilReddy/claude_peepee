@@ -525,3 +525,337 @@ func TestConstants(t *testing.T) {
 		t.Errorf("staleTimeout = %v, want 5 minutes", staleTimeout)
 	}
 }
+
+// ==================== ADDITIONAL MCP TESTS ====================
+
+func TestHandleRememberWithSpecialCharacters(t *testing.T) {
+	server, cleanup := setupTestServer(t)
+	defer cleanup()
+
+	tests := []struct {
+		name string
+		fact string
+	}{
+		{"unicode", "日本語テスト with mixed English"},
+		{"emojis", "Testing emojis 🚀 🎉 💻"},
+		{"quotes", `Quote: "Hello World"`},
+		{"newlines", "Line 1\nLine 2\nLine 3"},
+		{"sql injection", "'; DROP TABLE facts; --"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result, err := server.handleRemember(map[string]interface{}{
+				"fact": tt.fact,
+			})
+			if err != nil {
+				t.Fatalf("handleRemember() failed: %v", err)
+			}
+
+			res := result.(map[string]interface{})
+			if !res["success"].(bool) {
+				t.Error("Expected success = true")
+			}
+
+			// Verify fact was stored correctly
+			recallResult, _ := server.handleRecall(map[string]interface{}{})
+			recallRes := recallResult.(map[string]interface{})
+			facts := recallRes["facts"].([]map[string]interface{})
+
+			found := false
+			for _, f := range facts {
+				if f["content"].(string) == tt.fact {
+					found = true
+					break
+				}
+			}
+			if !found {
+				t.Error("Stored fact not found in recall")
+			}
+		})
+	}
+}
+
+func TestHandleRecallWithTagCombinations(t *testing.T) {
+	server, cleanup := setupTestServer(t)
+	defer cleanup()
+
+	// Add test facts with various tag combinations
+	server.handleRemember(map[string]interface{}{
+		"fact": "Frontend React component",
+		"tags": []interface{}{"frontend", "react", "component"},
+	})
+	server.handleRemember(map[string]interface{}{
+		"fact": "Backend API endpoint",
+		"tags": []interface{}{"backend", "api"},
+	})
+	server.handleRemember(map[string]interface{}{
+		"fact": "Database schema design",
+		"tags": []interface{}{"database", "schema"},
+	})
+
+	tests := []struct {
+		name     string
+		query    string
+		tags     []interface{}
+		wantMin  int
+		wantMax  int
+	}{
+		{"single tag", "", []interface{}{"frontend"}, 1, 1},
+		{"multiple tags OR", "", []interface{}{"frontend", "backend"}, 2, 2},
+		{"query and tag", "component", []interface{}{"react"}, 1, 1},
+		{"no matching tag", "", []interface{}{"nonexistent"}, 0, 0},
+		{"all facts", "", nil, 3, 3},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			args := map[string]interface{}{}
+			if tt.query != "" {
+				args["query"] = tt.query
+			}
+			if tt.tags != nil {
+				args["tags"] = tt.tags
+			}
+
+			result, err := server.handleRecall(args)
+			if err != nil {
+				t.Fatalf("handleRecall() failed: %v", err)
+			}
+
+			res := result.(map[string]interface{})
+			count := res["count"].(int)
+
+			if count < tt.wantMin || count > tt.wantMax {
+				t.Errorf("Got %d facts, want between %d and %d", count, tt.wantMin, tt.wantMax)
+			}
+		})
+	}
+}
+
+func TestHandleGetContextEmpty(t *testing.T) {
+	server, cleanup := setupTestServer(t)
+	defer cleanup()
+
+	// Get context with no facts
+	result, err := server.handleGetContext(map[string]interface{}{})
+	if err != nil {
+		t.Fatalf("handleGetContext() failed: %v", err)
+	}
+
+	res := result.(map[string]interface{})
+
+	if res["local_count"].(int) != 0 {
+		t.Errorf("local_count = %d, want 0", res["local_count"].(int))
+	}
+
+	if res["global_count"].(int) != 0 {
+		t.Errorf("global_count = %d, want 0", res["global_count"].(int))
+	}
+
+	localFacts := res["local_facts"].([]map[string]interface{})
+	if len(localFacts) != 0 {
+		t.Errorf("Got %d local facts, want 0", len(localFacts))
+	}
+}
+
+func TestHandleListInstancesNoInstances(t *testing.T) {
+	server, cleanup := setupTestServer(t)
+	defer cleanup()
+
+	result, err := server.handleListInstances(map[string]interface{}{})
+	if err != nil {
+		t.Fatalf("handleListInstances() failed: %v", err)
+	}
+
+	res := result.(map[string]interface{})
+
+	if res["count"].(int) != 0 {
+		t.Errorf("count = %d, want 0", res["count"].(int))
+	}
+}
+
+func TestHandleGetMessagesNoMessages(t *testing.T) {
+	server, cleanup := setupTestServer(t)
+	defer cleanup()
+
+	result, err := server.handleGetMessages(map[string]interface{}{})
+	if err != nil {
+		t.Fatalf("handleGetMessages() failed: %v", err)
+	}
+
+	res := result.(map[string]interface{})
+
+	if res["count"].(int) != 0 {
+		t.Errorf("count = %d, want 0", res["count"].(int))
+	}
+
+	messages := res["messages"].([]map[string]interface{})
+	if len(messages) != 0 {
+		t.Errorf("Got %d messages, want 0", len(messages))
+	}
+}
+
+func TestMultipleRememberAndRecall(t *testing.T) {
+	server, cleanup := setupTestServer(t)
+	defer cleanup()
+
+	// Add 100 facts
+	for i := 0; i < 100; i++ {
+		_, err := server.handleRemember(map[string]interface{}{
+			"fact": "Fact number " + string(rune('0'+i%10)),
+			"tags": []interface{}{"batch", "test"},
+		})
+		if err != nil {
+			t.Fatalf("handleRemember() failed at iteration %d: %v", i, err)
+		}
+	}
+
+	// Recall all
+	result, err := server.handleRecall(map[string]interface{}{
+		"limit": float64(100),
+	})
+	if err != nil {
+		t.Fatalf("handleRecall() failed: %v", err)
+	}
+
+	res := result.(map[string]interface{})
+	if res["count"].(int) != 100 {
+		t.Errorf("Got %d facts, want 100", res["count"].(int))
+	}
+}
+
+func TestSendMessageToSelf(t *testing.T) {
+	server, cleanup := setupTestServer(t)
+	defer cleanup()
+
+	// Register self
+	server.store.(*store.SQLiteStore).RegisterInstance("test-instance", 12345, "/test/dir")
+
+	// Send message to self
+	result, err := server.handleSendMessage(map[string]interface{}{
+		"to_instance": "test-instance",
+		"message":     "Note to self",
+	})
+	if err != nil {
+		t.Fatalf("handleSendMessage() to self failed: %v", err)
+	}
+
+	res := result.(map[string]interface{})
+	if !res["success"].(bool) {
+		t.Error("Expected success = true")
+	}
+
+	// Should be able to receive the message
+	msgResult, _ := server.handleGetMessages(map[string]interface{}{})
+	msgRes := msgResult.(map[string]interface{})
+	if msgRes["count"].(int) != 1 {
+		t.Errorf("Got %d messages, want 1", msgRes["count"].(int))
+	}
+}
+
+func TestRecallLimitBoundaries(t *testing.T) {
+	server, cleanup := setupTestServer(t)
+	defer cleanup()
+
+	// Add 5 facts
+	for i := 0; i < 5; i++ {
+		server.handleRemember(map[string]interface{}{
+			"fact": "Test fact " + string(rune('A'+i)),
+		})
+	}
+
+	tests := []struct {
+		name  string
+		limit float64
+		want  int
+	}{
+		{"limit 1", 1, 1},
+		{"limit 3", 3, 3},
+		{"limit 5", 5, 5},
+		{"limit 10 (more than available)", 10, 5},
+		{"limit 0 (use default)", 0, 5},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result, _ := server.handleRecall(map[string]interface{}{
+				"limit": tt.limit,
+			})
+			res := result.(map[string]interface{})
+			if res["count"].(int) != tt.want {
+				t.Errorf("Got %d facts with limit %v, want %d", res["count"].(int), tt.limit, tt.want)
+			}
+		})
+	}
+}
+
+func TestTagsAsStringSlice(t *testing.T) {
+	server, cleanup := setupTestServer(t)
+	defer cleanup()
+
+	// Test with []interface{} (common JSON parsing result)
+	result1, err := server.handleRemember(map[string]interface{}{
+		"fact": "Test fact",
+		"tags": []interface{}{"tag1", "tag2"},
+	})
+	if err != nil {
+		t.Fatalf("handleRemember() with []interface{} tags failed: %v", err)
+	}
+	res1 := result1.(map[string]interface{})
+	if !res1["success"].(bool) {
+		t.Error("Expected success with []interface{} tags")
+	}
+}
+
+func TestMessageWithSpecialCharacters(t *testing.T) {
+	server, cleanup := setupTestServer(t)
+	defer cleanup()
+
+	server.store.(*store.SQLiteStore).RegisterInstance("target", 1, "/dir")
+
+	messages := []string{
+		"Hello with unicode: 日本語",
+		"Emojis: 🚀 🎉",
+		`Quotes: "test"`,
+		"Newlines:\nLine2",
+	}
+
+	for _, msg := range messages {
+		result, err := server.handleSendMessage(map[string]interface{}{
+			"to_instance": "target",
+			"message":     msg,
+		})
+		if err != nil {
+			t.Fatalf("handleSendMessage() failed for message %q: %v", msg, err)
+		}
+		res := result.(map[string]interface{})
+		if !res["success"].(bool) {
+			t.Errorf("Expected success for message %q", msg)
+		}
+	}
+}
+
+func TestGetContextWithMixedFacts(t *testing.T) {
+	server, cleanup := setupTestServer(t)
+	defer cleanup()
+
+	// Add local facts
+	server.handleRemember(map[string]interface{}{"fact": "Local fact 1"})
+	server.handleRemember(map[string]interface{}{"fact": "Local fact 2"})
+
+	// Add facts from other directories
+	server.store.(*store.SQLiteStore).AddFact("Remote fact 1", nil, "/other/dir1")
+	server.store.(*store.SQLiteStore).AddFact("Remote fact 2", nil, "/other/dir2")
+
+	result, _ := server.handleGetContext(map[string]interface{}{})
+	res := result.(map[string]interface{})
+
+	if res["local_count"].(int) != 2 {
+		t.Errorf("local_count = %d, want 2", res["local_count"].(int))
+	}
+
+	if res["global_count"].(int) != 2 {
+		t.Errorf("global_count = %d, want 2", res["global_count"].(int))
+	}
+}
