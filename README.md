@@ -3,9 +3,10 @@
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
   <img src="https://img.shields.io/badge/MCP-Compatible-purple?style=for-the-badge" alt="MCP Compatible">
   <img src="https://img.shields.io/badge/Platform-macOS%20|%20Linux%20|%20Windows-blue?style=for-the-badge" alt="Platform">
+  <img src="https://img.shields.io/badge/Tokens-Saved%20💰-gold?style=for-the-badge" alt="Token Efficient">
 </p>
 
-<h1 align="center">Claude PP</h1>
+<h1 align="center">🧠 Claude PP</h1>
 <h3 align="center">Persistent Memory for Claude Code</h3>
 
 <p align="center">
@@ -13,16 +14,61 @@
 </p>
 
 <p align="center">
+  <em>"Break down large context into small, reusable pieces"</em>
+</p>
+
+<p align="center">
+  <a href="#-why-pp">Why PP?</a> •
   <a href="#-features">Features</a> •
   <a href="#-quick-start">Quick Start</a> •
-  <a href="#-usage">Usage</a> •
-  <a href="#-web-ui">Web UI</a> •
+  <a href="#-token-savings">Token Savings</a> •
   <a href="#-examples">Examples</a>
 </p>
 
 ---
 
-## The Problem
+## 🚽 Why "PP"?
+
+Like a child's first lesson in breaking things down into manageable pieces (*pee-pee* 🚽), **Claude PP** helps you break down your massive project context into small, digestible, reusable tokens!
+
+Instead of dumping your entire project history into every conversation (expensive!), PP lets you:
+- **Fragment** large context into tagged facts
+- **Store** only what matters
+- **Retrieve** just what's needed
+- **Save tokens** = Save money 💰
+
+> *"Don't flood the conversation - just let it flow in small, efficient streams!"*
+
+---
+
+## 💰 Token Savings
+
+**The Real Problem: Token Waste**
+
+| Without Claude PP | With Claude PP |
+|-------------------|----------------|
+| Re-explain project structure every session | Stored once, recalled instantly |
+| Copy-paste same conventions repeatedly | Tagged and searchable |
+| Lose context between sessions | Persistent forever |
+| ~2000+ tokens wasted per session | ~50 tokens to recall |
+
+**Example Savings:**
+```
+Traditional approach:
+  "Our project uses React 18 with TypeScript, Vite for bundling,
+   PostgreSQL database, Redis caching, Docker deployment..."
+  = 500+ tokens EVERY session
+
+With Claude PP:
+  claude_pp recall -t stack
+  = 50 tokens (just the search) + relevant results only
+```
+
+**Estimated savings: 80-90% fewer tokens on context!**
+
+---
+
+## 🎯 The Problem
 
 Every time you start a new Claude Code session, you have to re-explain:
 - Your project architecture
@@ -342,8 +388,11 @@ MIT License - see [LICENSE](LICENSE) for details.
 ---
 
 <p align="center">
-  <strong>Claude PP</strong> - Because Claude Code deserves a memory
+  <strong>🧠 Claude PP</strong> - Because Claude Code deserves a memory
 </p>
 <p align="center">
-  Made with care for the developer community
+  <em>Break it down. Store it smart. Save those tokens! 💰</em>
+</p>
+<p align="center">
+  Made with 💜 for developers who hate repeating themselves
 </p>
