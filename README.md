@@ -93,6 +93,150 @@ Every time you start a new Claude Code session, you have to re-explain:
 
 ---
 
+## 🔬 How It Works
+
+### Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                         Claude Code                                  │
+│                              │                                       │
+│                     MCP Protocol (JSON-RPC 2.0)                     │
+│                         stdin/stdout                                 │
+│                              │                                       │
+│                              ▼                                       │
+│  ┌─────────────────────────────────────────────────────────────┐   │
+│  │                    Claude PP MCP Server                      │   │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │   │
+│  │  │  Remember   │  │   Recall    │  │  Instance Messaging │  │   │
+│  │  │  (Store)    │  │  (Search)   │  │   (Coordination)    │  │   │
+│  │  └─────────────┘  └─────────────┘  └─────────────────────┘  │   │
+│  │                         │                                    │   │
+│  │                         ▼                                    │   │
+│  │  ┌─────────────────────────────────────────────────────┐    │   │
+│  │  │              SQLite Database (FTS5)                 │    │   │
+│  │  │  ~/.claude_peepee/claude_peepee.db                  │    │   │
+│  │  └─────────────────────────────────────────────────────┘    │   │
+│  └─────────────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### Step-by-Step Flow
+
+1. **You start Claude Code** → Claude PP MCP server starts automatically
+2. **Claude needs context** → Calls `get_context` to load relevant facts
+3. **You make decisions** → Claude stores them using `remember`
+4. **Next session** → Previous facts are instantly available via `recall`
+
+### What Data Is Saved
+
+Claude PP stores everything in a local SQLite database with full-text search capabilities:
+
+| Data Type | What's Stored | Example |
+|-----------|--------------|---------|
+| **Facts** | Any text information you want to remember | "API uses JWT authentication with RS256" |
+| **Tags** | Comma-separated labels for filtering | "api, security, authentication" |
+| **Source Directory** | Where the fact was created | "/home/user/myproject" |
+| **Timestamps** | When created and last updated | "2024-01-15 10:30:00" |
+| **Instances** | Running Claude Code sessions | ID, PID, working directory, heartbeat |
+| **Messages** | Communication between instances | From, To, Content, Read status |
+
+### Database Schema
+
+```sql
+-- Facts table (your persistent memory)
+facts (
+    id INTEGER PRIMARY KEY,
+    content TEXT,           -- The actual fact/knowledge
+    tags TEXT,              -- Comma-separated tags
+    source_dir TEXT,        -- Directory where fact was created
+    created_at DATETIME,
+    updated_at DATETIME
+)
+
+-- Full-text search index (for fast keyword search)
+facts_fts (content, tags)   -- FTS5 virtual table
+
+-- Running instances (for multi-instance coordination)
+instances (
+    id TEXT PRIMARY KEY,    -- Unique instance ID
+    pid INTEGER,            -- Process ID
+    working_dir TEXT,       -- Current working directory
+    started_at DATETIME,
+    last_heartbeat DATETIME
+)
+
+-- Messages between instances
+messages (
+    id INTEGER PRIMARY KEY,
+    from_instance TEXT,
+    to_instance TEXT,
+    content TEXT,
+    created_at DATETIME,
+    read_at DATETIME        -- NULL if unread
+)
+```
+
+### The MCP Protocol
+
+Claude PP uses the **Model Context Protocol (MCP)** - a standardized way for AI assistants to access external tools:
+
+```
+Claude Code                    Claude PP Server
+    │                                │
+    │ ─── initialize request ───────>│
+    │ <── capabilities response ─────│
+    │                                │
+    │ ─── tools/list request ───────>│
+    │ <── available tools ───────────│
+    │                                │
+    │ ─── tools/call (remember) ────>│
+    │ <── success response ──────────│
+    │                                │
+    │ ─── tools/call (recall) ──────>│
+    │ <── matching facts ────────────│
+```
+
+**Protocol Details:**
+- Transport: `stdin/stdout` (fast, no network overhead)
+- Format: JSON-RPC 2.0
+- Tools exposed: 6 (remember, recall, get_context, list_instances, send_message, get_messages)
+
+### How Token Savings Work
+
+**Traditional approach** (expensive):
+```
+Every session, you type:
+"This project uses React 18 with TypeScript, we follow these conventions..."
+= 500+ tokens × every session = 💸💸💸
+```
+
+**With Claude PP** (efficient):
+```
+Session 1: claude_peepee remember "React 18 + TypeScript project" -t stack
+           (stored once: ~10 tokens)
+
+Session 2+: Claude calls get_context automatically
+            Only relevant facts loaded (~50 tokens)
+
+Savings: 90% fewer tokens!
+```
+
+### Data Location
+
+```
+~/.claude_peepee/
+└── claude_peepee.db      # All your data in one SQLite file
+    ├── facts             # Your stored knowledge
+    ├── facts_fts         # Full-text search index
+    ├── instances         # Running session registry
+    └── messages          # Inter-instance messages
+```
+
+**Privacy:** All data stays 100% local. Nothing is sent to external servers.
+
+---
+
 ## 🚀 Quick Start
 
 ### Install (30 seconds)
