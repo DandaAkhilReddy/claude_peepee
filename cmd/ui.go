@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 
 	"github.com/DandaAkhilReddy/claude_pp/internal/store"
 	"github.com/DandaAkhilReddy/claude_pp/internal/ui"
@@ -35,8 +34,7 @@ Example:
 			return fmt.Errorf("failed to create data directory: %w", err)
 		}
 
-		dbPath := filepath.Join(dataDir, "claude_pp.db")
-		s, err := store.NewSQLiteStore(dbPath)
+		s, err := store.NewSQLiteStore(dataDir)
 		if err != nil {
 			return fmt.Errorf("failed to open database: %w", err)
 		}
