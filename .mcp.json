@@ -1,0 +1,33 @@
+{
+  "name": "claude_pp",
+  "version": "0.1.0",
+  "description": "Persistent memory and multi-instance communication for Claude Code",
+  "command": "claude_pp",
+  "args": ["serve"],
+  "tools": [
+    {
+      "name": "remember",
+      "description": "Store a fact, decision, or piece of context"
+    },
+    {
+      "name": "recall",
+      "description": "Search for previously stored facts"
+    },
+    {
+      "name": "get_context",
+      "description": "Get all relevant context for the current directory"
+    },
+    {
+      "name": "list_instances",
+      "description": "List all running claude_pp instances"
+    },
+    {
+      "name": "send_message",
+      "description": "Send a message to another instance"
+    },
+    {
+      "name": "get_messages",
+      "description": "Get messages sent to this instance"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+# Binaries
+claude_pp
+claude_pp-*
+*.exe
+
+# Go build cache
+*.a
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test
+coverage.out
+*.test
+
+# Data (local development)
+.claude_pp/
